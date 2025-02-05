@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FantasyRealm.AppHost.Features
+namespace Core.App.Interfaces
 {
-    internal class Handler
+    public interface ICommandRequest
     {
     }
 }
