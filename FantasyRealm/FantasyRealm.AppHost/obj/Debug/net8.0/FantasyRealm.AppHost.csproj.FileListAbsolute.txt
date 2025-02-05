@@ -49,3 +49,4 @@ D:\fantasy-realm\FantasyRealm\FantasyRealm.AppHost\obj\Debug\net8.0\refint\Fanta
 D:\fantasy-realm\FantasyRealm\FantasyRealm.AppHost\obj\Debug\net8.0\FantasyRealm.AppHost.pdb
 D:\fantasy-realm\FantasyRealm\FantasyRealm.AppHost\obj\Debug\net8.0\FantasyRealm.AppHost.genruntimeconfig.cache
 D:\fantasy-realm\FantasyRealm\FantasyRealm.AppHost\obj\Debug\net8.0\ref\FantasyRealm.AppHost.dll
+D:\fantasy-realm\FantasyRealm\FantasyRealm.AppHost\obj\Debug\net8.0\FantasyRealm.AppHost.sourcelink.json

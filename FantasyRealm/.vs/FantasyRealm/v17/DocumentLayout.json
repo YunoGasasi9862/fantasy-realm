@@ -1,7 +1,56 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\fantasy-realm\\FantasyRealm\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E5B3858D-51A3-45AE-9EDB-592FF2E138FD}|Core\\Core.csproj|d:\\fantasy-realm\\fantasyrealm\\core\\app\\features\\commandresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5B3858D-51A3-45AE-9EDB-592FF2E138FD}|Core\\Core.csproj|solutionrelative:core\\app\\features\\commandresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5B3858D-51A3-45AE-9EDB-592FF2E138FD}|Core\\Core.csproj|d:\\fantasy-realm\\fantasyrealm\\core\\app\\features\\handler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5B3858D-51A3-45AE-9EDB-592FF2E138FD}|Core\\Core.csproj|solutionrelative:core\\app\\features\\handler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5B3858D-51A3-45AE-9EDB-592FF2E138FD}|Core\\Core.csproj|d:\\fantasy-realm\\fantasyrealm\\core\\app\\features\\queryresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5B3858D-51A3-45AE-9EDB-592FF2E138FD}|Core\\Core.csproj|solutionrelative:core\\app\\features\\queryresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5B3858D-51A3-45AE-9EDB-592FF2E138FD}|Core\\Core.csproj|d:\\fantasy-realm\\fantasyrealm\\core\\app\\interfaces\\ihandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5B3858D-51A3-45AE-9EDB-592FF2E138FD}|Core\\Core.csproj|solutionrelative:core\\app\\interfaces\\ihandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5B3858D-51A3-45AE-9EDB-592FF2E138FD}|Core\\Core.csproj|d:\\fantasy-realm\\fantasyrealm\\core\\app\\interfaces\\iqueryresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5B3858D-51A3-45AE-9EDB-592FF2E138FD}|Core\\Core.csproj|solutionrelative:core\\app\\interfaces\\iqueryresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5B3858D-51A3-45AE-9EDB-592FF2E138FD}|Core\\Core.csproj|d:\\fantasy-realm\\fantasyrealm\\core\\app\\interfaces\\iqueryrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5B3858D-51A3-45AE-9EDB-592FF2E138FD}|Core\\Core.csproj|solutionrelative:core\\app\\interfaces\\iqueryrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5B3858D-51A3-45AE-9EDB-592FF2E138FD}|Core\\Core.csproj|d:\\fantasy-realm\\fantasyrealm\\core\\app\\interfaces\\icommandresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5B3858D-51A3-45AE-9EDB-592FF2E138FD}|Core\\Core.csproj|solutionrelative:core\\app\\interfaces\\icommandresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5B3858D-51A3-45AE-9EDB-592FF2E138FD}|Core\\Core.csproj|d:\\fantasy-realm\\fantasyrealm\\core\\app\\features\\commandrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5B3858D-51A3-45AE-9EDB-592FF2E138FD}|Core\\Core.csproj|solutionrelative:core\\app\\features\\commandrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5B3858D-51A3-45AE-9EDB-592FF2E138FD}|Core\\Core.csproj|d:\\fantasy-realm\\fantasyrealm\\core\\app\\domain\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5B3858D-51A3-45AE-9EDB-592FF2E138FD}|Core\\Core.csproj|solutionrelative:core\\app\\domain\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5B3858D-51A3-45AE-9EDB-592FF2E138FD}|Core\\Core.csproj|d:\\fantasy-realm\\fantasyrealm\\core\\app\\interfaces\\icommandrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5B3858D-51A3-45AE-9EDB-592FF2E138FD}|Core\\Core.csproj|solutionrelative:core\\app\\interfaces\\icommandrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5B3858D-51A3-45AE-9EDB-592FF2E138FD}|Core\\Core.csproj|d:\\fantasy-realm\\fantasyrealm\\core\\core.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{E5B3858D-51A3-45AE-9EDB-592FF2E138FD}|Core\\Core.csproj|solutionrelative:core\\core.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C9DC7E77-A56F-4573-826C-E35CC78F998D}|FantasyRealm.ServiceDefaults\\FantasyRealm.ServiceDefaults.csproj|d:\\fantasy-realm\\fantasyrealm\\fantasyrealm.servicedefaults\\fantasyrealm.servicedefaults.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{C9DC7E77-A56F-4573-826C-E35CC78F998D}|FantasyRealm.ServiceDefaults\\FantasyRealm.ServiceDefaults.csproj|solutionrelative:fantasyrealm.servicedefaults\\fantasyrealm.servicedefaults.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +58,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 14,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,6 +91,162 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IHandler.cs",
+              "DocumentMoniker": "D:\\fantasy-realm\\FantasyRealm\\Core\\App\\Interfaces\\IHandler.cs",
+              "RelativeDocumentMoniker": "Core\\App\\Interfaces\\IHandler.cs",
+              "ToolTip": "D:\\fantasy-realm\\FantasyRealm\\Core\\App\\Interfaces\\IHandler.cs",
+              "RelativeToolTip": "Core\\App\\Interfaces\\IHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-05T08:50:13.083Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "QueryResponse.cs",
+              "DocumentMoniker": "D:\\fantasy-realm\\FantasyRealm\\Core\\App\\Features\\QueryResponse.cs",
+              "RelativeDocumentMoniker": "Core\\App\\Features\\QueryResponse.cs",
+              "ToolTip": "D:\\fantasy-realm\\FantasyRealm\\Core\\App\\Features\\QueryResponse.cs",
+              "RelativeToolTip": "Core\\App\\Features\\QueryResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-05T08:48:21.389Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IQueryRequest.cs",
+              "DocumentMoniker": "D:\\fantasy-realm\\FantasyRealm\\Core\\App\\Interfaces\\IQueryRequest.cs",
+              "RelativeDocumentMoniker": "Core\\App\\Interfaces\\IQueryRequest.cs",
+              "ToolTip": "D:\\fantasy-realm\\FantasyRealm\\Core\\App\\Interfaces\\IQueryRequest.cs",
+              "RelativeToolTip": "Core\\App\\Interfaces\\IQueryRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-05T08:48:08.148Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IQueryResponse.cs",
+              "DocumentMoniker": "D:\\fantasy-realm\\FantasyRealm\\Core\\App\\Interfaces\\IQueryResponse.cs",
+              "RelativeDocumentMoniker": "Core\\App\\Interfaces\\IQueryResponse.cs",
+              "ToolTip": "D:\\fantasy-realm\\FantasyRealm\\Core\\App\\Interfaces\\IQueryResponse.cs",
+              "RelativeToolTip": "Core\\App\\Interfaces\\IQueryResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-05T08:48:00.92Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ICommandRequest.cs",
+              "DocumentMoniker": "D:\\fantasy-realm\\FantasyRealm\\Core\\App\\Interfaces\\ICommandRequest.cs",
+              "RelativeDocumentMoniker": "Core\\App\\Interfaces\\ICommandRequest.cs",
+              "ToolTip": "D:\\fantasy-realm\\FantasyRealm\\Core\\App\\Interfaces\\ICommandRequest.cs",
+              "RelativeToolTip": "Core\\App\\Interfaces\\ICommandRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-05T08:44:45.342Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ICommandResponse.cs",
+              "DocumentMoniker": "D:\\fantasy-realm\\FantasyRealm\\Core\\App\\Interfaces\\ICommandResponse.cs",
+              "RelativeDocumentMoniker": "Core\\App\\Interfaces\\ICommandResponse.cs",
+              "ToolTip": "D:\\fantasy-realm\\FantasyRealm\\Core\\App\\Interfaces\\ICommandResponse.cs",
+              "RelativeToolTip": "Core\\App\\Interfaces\\ICommandResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-05T08:44:37.625Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CommandResponse.cs",
+              "DocumentMoniker": "D:\\fantasy-realm\\FantasyRealm\\Core\\App\\Features\\CommandResponse.cs",
+              "RelativeDocumentMoniker": "Core\\App\\Features\\CommandResponse.cs",
+              "ToolTip": "D:\\fantasy-realm\\FantasyRealm\\Core\\App\\Features\\CommandResponse.cs",
+              "RelativeToolTip": "Core\\App\\Features\\CommandResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-05T08:43:11.121Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CommandRequest.cs",
+              "DocumentMoniker": "D:\\fantasy-realm\\FantasyRealm\\Core\\App\\Features\\CommandRequest.cs",
+              "RelativeDocumentMoniker": "Core\\App\\Features\\CommandRequest.cs",
+              "ToolTip": "D:\\fantasy-realm\\FantasyRealm\\Core\\App\\Features\\CommandRequest.cs",
+              "RelativeToolTip": "Core\\App\\Features\\CommandRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-05T08:43:02.434Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Handler.cs",
+              "DocumentMoniker": "D:\\fantasy-realm\\FantasyRealm\\Core\\App\\Features\\Handler.cs",
+              "RelativeDocumentMoniker": "Core\\App\\Features\\Handler.cs",
+              "ToolTip": "D:\\fantasy-realm\\FantasyRealm\\Core\\App\\Features\\Handler.cs",
+              "RelativeToolTip": "Core\\App\\Features\\Handler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-05T08:42:52.751Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Entity.cs",
+              "DocumentMoniker": "D:\\fantasy-realm\\FantasyRealm\\Core\\App\\Domain\\Entity.cs",
+              "RelativeDocumentMoniker": "Core\\App\\Domain\\Entity.cs",
+              "ToolTip": "D:\\fantasy-realm\\FantasyRealm\\Core\\App\\Domain\\Entity.cs",
+              "RelativeToolTip": "Core\\App\\Domain\\Entity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-05T08:42:23.683Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "FantasyRealm.ServiceDefaults",
+              "DocumentMoniker": "D:\\fantasy-realm\\FantasyRealm\\FantasyRealm.ServiceDefaults\\FantasyRealm.ServiceDefaults.csproj",
+              "RelativeDocumentMoniker": "FantasyRealm.ServiceDefaults\\FantasyRealm.ServiceDefaults.csproj",
+              "ToolTip": "D:\\fantasy-realm\\FantasyRealm\\FantasyRealm.ServiceDefaults\\FantasyRealm.ServiceDefaults.csproj",
+              "RelativeToolTip": "FantasyRealm.ServiceDefaults\\FantasyRealm.ServiceDefaults.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-02-05T08:42:06.086Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Core",
+              "DocumentMoniker": "D:\\fantasy-realm\\FantasyRealm\\Core\\Core.csproj",
+              "RelativeDocumentMoniker": "Core\\Core.csproj",
+              "ToolTip": "D:\\fantasy-realm\\FantasyRealm\\Core\\Core.csproj",
+              "RelativeToolTip": "Core\\Core.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-02-05T08:36:32.03Z",
+              "EditorCaption": ""
             }
           ]
         }
