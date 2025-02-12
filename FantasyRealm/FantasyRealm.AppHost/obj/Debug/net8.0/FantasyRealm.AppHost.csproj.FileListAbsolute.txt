@@ -41,12 +41,13 @@ D:\fantasy-realm\FantasyRealm\FantasyRealm.AppHost\obj\Debug\net8.0\FantasyRealm
 D:\fantasy-realm\FantasyRealm\FantasyRealm.AppHost\obj\Debug\net8.0\FantasyRealm.AppHost.AssemblyInfoInputs.cache
 D:\fantasy-realm\FantasyRealm\FantasyRealm.AppHost\obj\Debug\net8.0\FantasyRealm.AppHost.AssemblyInfo.cs
 D:\fantasy-realm\FantasyRealm\FantasyRealm.AppHost\obj\Debug\net8.0\FantasyRealm.AppHost.csproj.CoreCompileInputs.cache
-D:\fantasy-realm\FantasyRealm\FantasyRealm.AppHost\obj\Debug\net8.0\Aspire\references\.ProjectMetadata.g.cs
+D:\fantasy-realm\FantasyRealm\FantasyRealm.AppHost\obj\Debug\net8.0\Aspire\references\API_FantasyRealm.ProjectMetadata.g.cs
+D:\fantasy-realm\FantasyRealm\FantasyRealm.AppHost\obj\Debug\net8.0\Aspire\references\App_FantasyRealm.ProjectMetadata.g.cs
 D:\fantasy-realm\FantasyRealm\FantasyRealm.AppHost\obj\Debug\net8.0\Aspire\references\_AppHost.ProjectMetadata.g.cs
+D:\fantasy-realm\FantasyRealm\FantasyRealm.AppHost\obj\Debug\net8.0\FantasyRealm.AppHost.sourcelink.json
 D:\fantasy-realm\FantasyRealm\FantasyRealm.AppHost\obj\Debug\net8.0\FantasyR.D3351213.Up2Date
 D:\fantasy-realm\FantasyRealm\FantasyRealm.AppHost\obj\Debug\net8.0\FantasyRealm.AppHost.dll
 D:\fantasy-realm\FantasyRealm\FantasyRealm.AppHost\obj\Debug\net8.0\refint\FantasyRealm.AppHost.dll
 D:\fantasy-realm\FantasyRealm\FantasyRealm.AppHost\obj\Debug\net8.0\FantasyRealm.AppHost.pdb
 D:\fantasy-realm\FantasyRealm\FantasyRealm.AppHost\obj\Debug\net8.0\FantasyRealm.AppHost.genruntimeconfig.cache
 D:\fantasy-realm\FantasyRealm\FantasyRealm.AppHost\obj\Debug\net8.0\ref\FantasyRealm.AppHost.dll
-D:\fantasy-realm\FantasyRealm\FantasyRealm.AppHost\obj\Debug\net8.0\FantasyRealm.AppHost.sourcelink.json
