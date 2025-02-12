@@ -1,0 +1,6 @@
+@API.FantasyRealm_HostAddress = http://localhost:5043
+
+GET {{API.FantasyRealm_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
