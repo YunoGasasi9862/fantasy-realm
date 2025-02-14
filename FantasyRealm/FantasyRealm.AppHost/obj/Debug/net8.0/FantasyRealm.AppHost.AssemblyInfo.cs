@@ -24,7 +24,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FantasyRealm.AppHost")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+50959a338e1326ed6459ba19fcd870488f0586d8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bfe7c03c20513ba6cdb71314ee4f685e85b4cd3e")]
 [assembly: System.Reflection.AssemblyProductAttribute("FantasyRealm.AppHost")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FantasyRealm.AppHost")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

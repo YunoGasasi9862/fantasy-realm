@@ -3,7 +3,7 @@ using Core.App.Domain;
 
 namespace App.FantasyRealm
 {
-    public class Tag: Entity 
+    public class Personality: Entity 
     {
 
     }
