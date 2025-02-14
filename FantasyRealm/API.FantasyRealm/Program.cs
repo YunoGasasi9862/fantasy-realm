@@ -1,7 +1,14 @@
+using App.FantasyRealm.Domain;
+using App.FantasyRealm.Features;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
+builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(FantasyRealmDBHandler).Assembly));
+var connectionString = builder.Configuration.GetConnectionString("FantasyRalmDBConnectionString");
+builder.Services.AddDbContext<FantasyRealmDBContext>(options => options.UseSqlServer(connectionString));
 // Add services to the container.
 
 builder.Services.AddControllers();
