@@ -8,5 +8,5 @@ namespace Projects;
 public class FantasyRealm_AppHost
 {
     private FantasyRealm_AppHost() { }
-    public static string ProjectPath => """D:\fantasy-realm\FantasyRealm\FantasyRealm.AppHost""";
+    public static string ProjectPath => """C:\Users\bdduz\source\repos\YunoGasasi9862\fantasy-realm\FantasyRealm\FantasyRealm.AppHost""";
 }

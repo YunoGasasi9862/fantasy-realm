@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FantasyRealm.ServiceDefaults")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+50959a338e1326ed6459ba19fcd870488f0586d8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b874b02d9c2a18cb1ae1d7102e115f12850690a6")]
 [assembly: System.Reflection.AssemblyProductAttribute("FantasyRealm.ServiceDefaults")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FantasyRealm.ServiceDefaults")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
