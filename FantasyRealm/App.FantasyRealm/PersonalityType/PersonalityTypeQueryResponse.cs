@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace App.FantasyRealm.PersonalityType
 {
     public class PersonalityTypeQueryResponse: QueryResponse
-    {
+    {  
+        public string Name { get; set; }
     }
 }
