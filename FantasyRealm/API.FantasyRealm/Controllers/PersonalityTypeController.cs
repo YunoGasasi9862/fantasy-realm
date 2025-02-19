@@ -5,8 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.FantasyRealm.Controllers
 {
     [ApiController]
-    public class PersonalityTypesController : ControllerBase
+    public class PersonalityTypeController : ControllerBase
     {
         private readonly IMediator _mediator;
     }
+
+    //TODO (Get), (Create), (Update), (Delete)
 }

@@ -1,10 +1,9 @@
-﻿
-using Core.App.Domain;
+﻿using Core.App.Domain;
 using System.ComponentModel.DataAnnotations;
 
-namespace App.FantasyRealm
+namespace App.FantasyRealm.Domain
 {
-    public class Personality: Entity 
+    public class PersonalityType: Entity
     {
         [Required, StringLength(125)]
         public string Name { get; set; }

@@ -2,6 +2,8 @@
 using App.FantasyRealm.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
@@ -19,7 +21,25 @@ namespace App.FantasyRealm.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("App.FantasyRealm.Tag", b =>
+            modelBuilder.Entity("App.FantasyRealm.Domain.PersonalityType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(125)
+                        .HasColumnType("nvarchar(125)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PersonalityType");
+                });
+
+            modelBuilder.Entity("App.FantasyRealm.Domain.Skill", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -29,7 +49,7 @@ namespace App.FantasyRealm.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags");
+                    b.ToTable("Skill");
                 });
 #pragma warning restore 612, 618
         }

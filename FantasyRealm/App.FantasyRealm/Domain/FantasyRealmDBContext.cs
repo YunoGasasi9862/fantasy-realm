@@ -5,9 +5,11 @@ namespace App.FantasyRealm.Domain
 {
     public class FantasyRealmDBContext: DbContext
     {
-        DbSet<Personality> Tags { get; set; }
+        public DbSet<PersonalityType> PersonalityTypes { get; set; }
 
-        public FantasyRealmDBContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
+        public DbSet<Skill> Skills { get; set; }
+
+        public FantasyRealmDBContext(DbContextOptions<FantasyRealmDBContext> dbContextOptions) : base(dbContextOptions)
         {
 
         }

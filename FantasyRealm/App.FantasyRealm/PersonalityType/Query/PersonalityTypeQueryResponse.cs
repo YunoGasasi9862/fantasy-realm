@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.FantasyRealm.PersonalityType
+namespace App.FantasyRealm.PersonalityType.Query
 {
-    public class PersonalityTypeQueryResponse: QueryResponse
-    {  
+    public class PersonalityTypeQueryResponse : QueryResponse
+    {
         public string Name { get; set; }
     }
 }
