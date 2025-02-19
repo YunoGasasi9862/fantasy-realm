@@ -158,7 +158,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 14,
+          "SelectedChildIndex": 18,
           "Children": [
             {
               "$type": "Bookmark",
@@ -171,6 +171,22 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
               "$type": "Document",
@@ -347,8 +363,8 @@
               "Title": "PersonalityTypeQueryResponse.cs",
               "DocumentMoniker": "D:\\fantasy-realm\\FantasyRealm\\App.FantasyRealm\\PersonalityType\\Query\\PersonalityTypeQueryResponse.cs",
               "RelativeDocumentMoniker": "App.FantasyRealm\\PersonalityType\\Query\\PersonalityTypeQueryResponse.cs",
-              "ToolTip": "D:\\fantasy-realm\\FantasyRealm\\App.FantasyRealm\\PersonalityType\\Query\\PersonalityTypeQueryResponse.cs*",
-              "RelativeToolTip": "App.FantasyRealm\\PersonalityType\\Query\\PersonalityTypeQueryResponse.cs*",
+              "ToolTip": "D:\\fantasy-realm\\FantasyRealm\\App.FantasyRealm\\PersonalityType\\Query\\PersonalityTypeQueryResponse.cs",
+              "RelativeToolTip": "App.FantasyRealm\\PersonalityType\\Query\\PersonalityTypeQueryResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-14T09:34:18.075Z",
@@ -360,8 +376,8 @@
               "Title": "PersonalityTypeQueryRequest.cs",
               "DocumentMoniker": "D:\\fantasy-realm\\FantasyRealm\\App.FantasyRealm\\PersonalityType\\Query\\PersonalityTypeQueryRequest.cs",
               "RelativeDocumentMoniker": "App.FantasyRealm\\PersonalityType\\Query\\PersonalityTypeQueryRequest.cs",
-              "ToolTip": "D:\\fantasy-realm\\FantasyRealm\\App.FantasyRealm\\PersonalityType\\Query\\PersonalityTypeQueryRequest.cs*",
-              "RelativeToolTip": "App.FantasyRealm\\PersonalityType\\Query\\PersonalityTypeQueryRequest.cs*",
+              "ToolTip": "D:\\fantasy-realm\\FantasyRealm\\App.FantasyRealm\\PersonalityType\\Query\\PersonalityTypeQueryRequest.cs",
+              "RelativeToolTip": "App.FantasyRealm\\PersonalityType\\Query\\PersonalityTypeQueryRequest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAABvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-14T09:34:07.749Z",
@@ -386,8 +402,8 @@
               "Title": "App.FantasyRealm.csproj",
               "DocumentMoniker": "D:\\fantasy-realm\\FantasyRealm\\App.FantasyRealm\\App.FantasyRealm.csproj",
               "RelativeDocumentMoniker": "App.FantasyRealm\\App.FantasyRealm.csproj",
-              "ToolTip": "D:\\fantasy-realm\\FantasyRealm\\App.FantasyRealm\\App.FantasyRealm.csproj*",
-              "RelativeToolTip": "App.FantasyRealm\\App.FantasyRealm.csproj*",
+              "ToolTip": "D:\\fantasy-realm\\FantasyRealm\\App.FantasyRealm\\App.FantasyRealm.csproj",
+              "RelativeToolTip": "App.FantasyRealm\\App.FantasyRealm.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2025-02-14T09:15:56.084Z",
@@ -590,8 +606,8 @@
               "Title": "ICommandResponse.cs",
               "DocumentMoniker": "D:\\fantasy-realm\\FantasyRealm\\Core\\App\\Interfaces\\ICommandResponse.cs",
               "RelativeDocumentMoniker": "Core\\App\\Interfaces\\ICommandResponse.cs",
-              "ToolTip": "D:\\fantasy-realm\\FantasyRealm\\Core\\App\\Interfaces\\ICommandResponse.cs*",
-              "RelativeToolTip": "Core\\App\\Interfaces\\ICommandResponse.cs*",
+              "ToolTip": "D:\\fantasy-realm\\FantasyRealm\\Core\\App\\Interfaces\\ICommandResponse.cs",
+              "RelativeToolTip": "Core\\App\\Interfaces\\ICommandResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-05T08:44:37.625Z",
@@ -648,18 +664,6 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-05T08:42:23.683Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             }
           ]
         }
