@@ -8,19 +8,24 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Yennefer\\.nuget\\packages\\": {}
+    "C:\\Users\\bdduz\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\fantasy-realm\\FantasyRealm\\Core\\Core.csproj",
+      "projectUniqueName": "C:\\Users\\bdduz\\Documents\\GitHub\\fantasy-realm\\FantasyRealm\\Core\\Core.csproj",
       "projectName": "Core",
-      "projectPath": "D:\\fantasy-realm\\FantasyRealm\\Core\\Core.csproj",
-      "packagesPath": "C:\\Users\\Yennefer\\.nuget\\packages\\",
-      "outputPath": "D:\\fantasy-realm\\FantasyRealm\\Core\\obj\\",
+      "projectPath": "C:\\Users\\bdduz\\Documents\\GitHub\\fantasy-realm\\FantasyRealm\\Core\\Core.csproj",
+      "packagesPath": "C:\\Users\\bdduz\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\bdduz\\Documents\\GitHub\\fantasy-realm\\FantasyRealm\\Core\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Yennefer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\bdduz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -28,7 +33,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -46,7 +50,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net8.0": {
@@ -67,7 +72,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
