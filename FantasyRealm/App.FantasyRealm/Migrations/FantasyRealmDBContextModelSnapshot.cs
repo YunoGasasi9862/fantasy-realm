@@ -36,7 +36,7 @@ namespace App.FantasyRealm.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PersonalityType");
+                    b.ToTable("PersonalityTypes");
                 });
 
             modelBuilder.Entity("App.FantasyRealm.Domain.Skill", b =>
@@ -49,7 +49,7 @@ namespace App.FantasyRealm.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Skill");
+                    b.ToTable("Skills");
                 });
 #pragma warning restore 612, 618
         }

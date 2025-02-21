@@ -5,13 +5,13 @@
 namespace App.FantasyRealm.Migrations
 {
     /// <inheritdoc />
-    public partial class v3 : Migration
+    public partial class fantasy : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "PersonalityType",
+                name: "PersonalityTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -20,11 +20,11 @@ namespace App.FantasyRealm.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PersonalityType", x => x.Id);
+                    table.PrimaryKey("PK_PersonalityTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Skill",
+                name: "Skills",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -32,7 +32,7 @@ namespace App.FantasyRealm.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Skill", x => x.Id);
+                    table.PrimaryKey("PK_Skills", x => x.Id);
                 });
         }
 
@@ -40,10 +40,10 @@ namespace App.FantasyRealm.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "PersonalityType");
+                name: "PersonalityTypes");
 
             migrationBuilder.DropTable(
-                name: "Skill");
+                name: "Skills");
         }
     }
 }

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.FantasyRealm.Migrations
 {
     [DbContext(typeof(FantasyRealmDBContext))]
-    [Migration("20250219083348_v3")]
-    partial class v3
+    [Migration("20250221101857_fantasy")]
+    partial class fantasy
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,7 +39,7 @@ namespace App.FantasyRealm.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PersonalityType");
+                    b.ToTable("PersonalityTypes");
                 });
 
             modelBuilder.Entity("App.FantasyRealm.Domain.Skill", b =>
@@ -52,7 +52,7 @@ namespace App.FantasyRealm.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Skill");
+                    b.ToTable("Skills");
                 });
 #pragma warning restore 612, 618
         }
