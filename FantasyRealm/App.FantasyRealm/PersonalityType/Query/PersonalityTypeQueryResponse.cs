@@ -10,5 +10,7 @@ namespace App.FantasyRealm.PersonalityType.Query
     public class PersonalityTypeQueryResponse : QueryResponse
     {
         public string Name { get; set; }
+
+        public string Description { get; set; }
     }
 }

@@ -16,6 +16,7 @@ namespace App.FantasyRealm.PersonalityType.Query
             {
                 Id = pt.Id,
                 Name = pt.Name,
+                Description = pt.Description,
             }));
         }
     }

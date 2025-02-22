@@ -4,7 +4,8 @@ using App.FantasyRealm.PersonalityType.Update;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
+using Core.App.Features;
+using App.FantasyRealm.PersonalityType.Create;
 
 namespace API.FantasyRealm.Controllers
 {
@@ -48,9 +49,21 @@ namespace API.FantasyRealm.Controllers
         }
 
         [HttpPost]
-        public Task<IActionResult> Post()
+        public async Task<IActionResult> Post(PersonalityTypeCreateRequest personalityTypeCreateRequest)
         {
-            return null;
+            if (ModelState.IsValid)
+            {
+                CommandResponse response = await _mediator.Send(personalityTypeCreateRequest);
+
+                if (response.IsSuccessful)
+                {
+                    return Ok(response);
+                }
+
+                return BadRequest(response);
+            }
+
+            return BadRequest(ModelState);
         }
 
         [HttpPut]
@@ -58,7 +71,7 @@ namespace API.FantasyRealm.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _mediator.Send(request);
+                CommandResponse response = await _mediator.Send(request);
 
                 if (response.IsSuccessful)
                 {
@@ -74,10 +87,12 @@ namespace API.FantasyRealm.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _mediator.Send(new PersonalityTypeDeleteRequest() { Id = id });
+                CommandResponse response = await _mediator.Send(new PersonalityTypeDeleteRequest() { Id = id });
 
                 if (response.IsSuccessful)
+                {
                     return Ok(response);
+                }
 
                 return BadRequest(response);
             }

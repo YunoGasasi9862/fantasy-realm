@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace App.FantasyRealm.Interfaces
 {
-    internal interface IDBHandler
+    public interface IDBHandler
     {
     }
 }
