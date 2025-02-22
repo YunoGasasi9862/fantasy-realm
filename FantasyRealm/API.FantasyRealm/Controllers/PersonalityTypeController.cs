@@ -1,4 +1,6 @@
-﻿using App.FantasyRealm.PersonalityType.Query;
+﻿using App.FantasyRealm.PersonalityType.Delete;
+using App.FantasyRealm.PersonalityType.Query;
+using App.FantasyRealm.PersonalityType.Update;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -51,18 +53,35 @@ namespace API.FantasyRealm.Controllers
             return null;
         }
 
-
         [HttpPut]
-        public Task<IActionResult> Put()
+        public async Task<IActionResult> Put(PersonalityTypeUpdateRequest request)
         {
-            return null;
+            if (ModelState.IsValid)
+            {
+                var response = await _mediator.Send(request);
+
+                if (response.IsSuccessful)
+                {
+                    return Ok(response);
+                }
+                return BadRequest(response);
+            }
+            return BadRequest(ModelState);
         }
 
-
         [HttpDelete]
-        public Task<IActionResult> Delete()
+        public async Task<IActionResult> Delete(int id)
         {
-            return null;
+            if (ModelState.IsValid)
+            {
+                var response = await _mediator.Send(new PersonalityTypeDeleteRequest() { Id = id });
+
+                if (response.IsSuccessful)
+                    return Ok(response);
+
+                return BadRequest(response);
+            }
+            return BadRequest(ModelState);
         }
     }
 }
