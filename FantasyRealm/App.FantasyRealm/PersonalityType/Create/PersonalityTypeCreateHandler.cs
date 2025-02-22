@@ -1,26 +1,33 @@
 ﻿using App.FantasyRealm.Domain;
-using Core.App.Features;
+using App.FantasyRealm.Features;
+using Core.App.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.FantasyRealm.PersonalityType.Create
 {
-    public class PersonalityTypeCreateHandler : FantasyRealmDBContext, IRequestHandler<PersonalityTypeCreateRequest, CommandResponse>
+    public class PersonalityTypeCreateHandler : FantasyRealmDBHandler, IRequestHandler<PersonalityTypeCreateRequest, ICommandResponse>
     {
-        public PersonalityTypeCreateHandler(DbContextOptions<FantasyRealmDBContext> dbContextOptions) : base(dbContextOptions)
+        public PersonalityTypeCreateHandler(FantasyRealmDBContext fantasyRealmDbContext) : base(fantasyRealmDbContext)
         {
 
         }
 
-        public Task<CommandResponse> Handle(PersonalityTypeCreateRequest request, CancellationToken cancellationToken)
+        public async Task<ICommandResponse> Handle(PersonalityTypeCreateRequest request, CancellationToken cancellationToken)
         {
-            //for boran to do
-            throw new NotImplementedException();
+            if (await fantasyRealmDBContext.PersonalityTypes.AnyAsync(pt => pt.Name.ToLower().Trim().Equals(request.Name.ToLower().Trim()), cancellationToken))
+            {
+                return Error($"Personality Type - {request.Name} - already exists in the database!");
+            }
+
+            fantasyRealmDBContext.PersonalityTypes.Add(new Domain.PersonalityType
+            {
+                Name = request.Name,
+            });
+
+            await fantasyRealmDBContext.SaveChangesAsync();
+
+            return Success($"Personality Type: {request.ToString()} successfully created!", request.Id);
         }
     }
 }

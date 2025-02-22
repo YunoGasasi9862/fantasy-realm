@@ -1,4 +1,5 @@
 ﻿using App.FantasyRealm.Domain;
+using App.FantasyRealm.Features;
 using Core.App.Features;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -10,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace App.FantasyRealm.PersonalityType.Delete
 {
-    public class PersonalityTypeDeleteHandler : FantasyRealmDBContext, IRequestHandler<PersonalityTypeDeleteRequest, CommandResponse>
+    public class PersonalityTypeDeleteHandler : FantasyRealmDBHandler, IRequestHandler<PersonalityTypeDeleteRequest, CommandResponse>
     {
-        public PersonalityTypeDeleteHandler(DbContextOptions<FantasyRealmDBContext> dbContextOptions) : base(dbContextOptions)
+        public PersonalityTypeDeleteHandler(FantasyRealmDBContext fantasyRealmDbContext) : base(fantasyRealmDbContext)
         {
         }
 

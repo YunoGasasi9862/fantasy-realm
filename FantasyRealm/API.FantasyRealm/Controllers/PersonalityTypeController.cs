@@ -1,6 +1,7 @@
 ﻿using App.FantasyRealm.PersonalityType.Query;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace API.FantasyRealm.Controllers
@@ -19,9 +20,29 @@ namespace API.FantasyRealm.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var response = _mediator.Send(new PersonalityTypeQueryRequest());
-            Debug.WriteLine(response);
-            return Ok(response);
+            IQueryable<PersonalityTypeQueryResponse> personalityTypeQueryResponseIQ = await _mediator.Send(new PersonalityTypeQueryRequest());
+            List<PersonalityTypeQueryResponse> personalityTypeQueryResponseList = personalityTypeQueryResponseIQ.ToList();
+
+            if (personalityTypeQueryResponseList.Count > 0)
+            {
+                return Ok(personalityTypeQueryResponseList);
+            }
+
+            return NoContent();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            IQueryable<PersonalityTypeQueryResponse> personalityTypeQueryResponseIQ = await _mediator.Send(new PersonalityTypeQueryRequest());
+            PersonalityTypeQueryResponse personalityTypeQuery = await personalityTypeQueryResponseIQ.SingleOrDefaultAsync(pt => pt.Id == id);
+
+            if (personalityTypeQueryResponseIQ == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(personalityTypeQuery);
         }
 
         [HttpPost]

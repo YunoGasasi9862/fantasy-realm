@@ -1,4 +1,5 @@
 ﻿using App.FantasyRealm.Domain;
+using App.FantasyRealm.Features;
 using Core.App.Features;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -10,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace App.FantasyRealm.PersonalityType.Update
 {
-    public class PersonalityTypeUpdateHandler : FantasyRealmDBContext, IRequestHandler<PersonalityTypeUpdateRequest, CommandResponse>
+    public class PersonalityTypeUpdateHandler : FantasyRealmDBHandler, IRequestHandler<PersonalityTypeUpdateRequest, CommandResponse>
     {
-        public PersonalityTypeUpdateHandler(DbContextOptions<FantasyRealmDBContext> dbContextOptions) : base(dbContextOptions)
+        public PersonalityTypeUpdateHandler(FantasyRealmDBContext fantasyRealmDbContext) : base(fantasyRealmDbContext)
         {
         }
 
