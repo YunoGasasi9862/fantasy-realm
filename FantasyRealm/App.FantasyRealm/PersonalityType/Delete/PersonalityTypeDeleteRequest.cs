@@ -11,8 +11,7 @@ namespace App.FantasyRealm.PersonalityType.Delete
 {
     public class PersonalityTypeDeleteRequest: CommandRequest, IRequest<CommandResponse>
     {
-        [Required]
-        [StringLength(150)]
+        [Required, StringLength(125)]
         public string Name { get; set; }
     }
 }

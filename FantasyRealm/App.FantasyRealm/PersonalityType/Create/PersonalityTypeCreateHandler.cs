@@ -16,7 +16,7 @@ namespace App.FantasyRealm.PersonalityType.Create
 
         public async Task<CommandResponse> Handle(PersonalityTypeCreateRequest request, CancellationToken cancellationToken)
         {
-            if (await fantasyRealmDBContext.PersonalityTypes.AnyAsync(pt => pt.Name.ToLower().Trim().Equals(request.Name.ToLower().Trim()), cancellationToken))
+            if (await fantasyRealmDBContext.PersonalityTypes.AnyAsync(pt => pt.Name.ToUpper() == request.Name.ToUpper().Trim(), cancellationToken))
             {
                 return (CommandResponse) Error($"Personality Type - {request.Name} - already exists in the database!");
             }

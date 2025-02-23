@@ -6,8 +6,7 @@ namespace App.FantasyRealm.PersonalityType.Create
 {
     public class PersonalityTypeCreateRequest: CommandRequest, IRequest<CommandResponse>
     {
-        [Required]
-        [StringLength(150)]
+        [Required, StringLength(125)]
         public string Name { get; set; }
 
         [Required, StringLength(125)]
