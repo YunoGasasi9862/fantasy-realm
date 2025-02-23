@@ -1,5 +1,6 @@
 ﻿using App.FantasyRealm.Domain;
 using App.FantasyRealm.Features;
+using Azure;
 using Core.App.Features;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -17,9 +18,21 @@ namespace App.FantasyRealm.PersonalityType.Update
         {
         }
 
-        public Task<CommandResponse> Handle(PersonalityTypeUpdateRequest request, CancellationToken cancellationToken)
+        public async Task<CommandResponse> Handle(PersonalityTypeUpdateRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            if (await fantasyRealmDBContext.PersonalityTypes.AnyAsync(t => t.Id != request.Id && t.Name.ToUpper() == request.Name.ToUpper().Trim(), cancellationToken))
+                return (CommandResponse)Error($"Personality Type - {request.Name} - with the same name already exists in the database!");
+
+            var personalityType = await fantasyRealmDBContext.PersonalityTypes.SingleOrDefaultAsync(t => t.Id == request.Id, cancellationToken);
+            if(personalityType is null)
+                return (CommandResponse)Error($"Personality Type - {request.Name} - does not exist!");
+
+            personalityType.Name = request.Name.Trim();
+            fantasyRealmDBContext.PersonalityTypes.Update(personalityType);
+
+            await fantasyRealmDBContext.SaveChangesAsync(cancellationToken);
+
+            return (CommandResponse)Success($"Personality Type: {request.ToString()} successfully updated!", request.Id);
         }
     }
 }

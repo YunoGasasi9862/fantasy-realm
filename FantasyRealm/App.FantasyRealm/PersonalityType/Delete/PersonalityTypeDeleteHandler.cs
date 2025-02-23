@@ -1,5 +1,6 @@
 ﻿using App.FantasyRealm.Domain;
 using App.FantasyRealm.Features;
+using Azure;
 using Core.App.Features;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -17,9 +18,16 @@ namespace App.FantasyRealm.PersonalityType.Delete
         {
         }
 
-        Task<CommandResponse> IRequestHandler<PersonalityTypeDeleteRequest, CommandResponse>.Handle(PersonalityTypeDeleteRequest request, CancellationToken cancellationToken)
+        async Task<CommandResponse> IRequestHandler<PersonalityTypeDeleteRequest, CommandResponse>.Handle(PersonalityTypeDeleteRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var personalityType = await fantasyRealmDBContext.PersonalityTypes.SingleOrDefaultAsync(t => t.Id == request.Id, cancellationToken);
+            if (personalityType is null)
+                return (CommandResponse)Error($"Personality Type - {request.Name} - does not exist!");
+
+            fantasyRealmDBContext.PersonalityTypes.Remove(personalityType);
+            await fantasyRealmDBContext.SaveChangesAsync(cancellationToken);
+
+            return (CommandResponse)Success($"Personality Type: {request.ToString()} successfully removed!", request.Id);
         }
     }
 }
