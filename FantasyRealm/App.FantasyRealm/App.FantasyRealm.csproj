@@ -21,6 +21,17 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="PersonalityAnswer\Create\" />
+    <Folder Include="PersonalityAnswer\Delete\" />
+    <Folder Include="PersonalityAnswer\Query\" />
+    <Folder Include="PersonalityAnswer\Update\" />
+    <Folder Include="QuestionChoice\Create\" />
+    <Folder Include="QuestionChoice\Delete\" />
+    <Folder Include="QuestionChoice\Query\" />
+    <Folder Include="QuestionChoice\Update\" />
+    <Folder Include="Question\Delete\" />
+    <Folder Include="Question\Query\" />
+    <Folder Include="Question\Update\" />
   </ItemGroup>
 
 </Project>
