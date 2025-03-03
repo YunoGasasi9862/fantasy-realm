@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.FantasyRealm.Question.Create
+namespace App.FantasyRealm.Question.Delete
 {
-    public class QuestionCreateRequest: CommandRequest, IRequest<CommandResponse>
+    public class QuestionDeleteRequest: CommandRequest, IRequest<CommandResponse>
     {
     }
 }

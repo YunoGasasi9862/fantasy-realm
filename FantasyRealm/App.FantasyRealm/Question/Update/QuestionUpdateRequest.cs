@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.FantasyRealm.Question.Create
+namespace App.FantasyRealm.Question.Update
 {
-    public class QuestionCreateRequest: CommandRequest, IRequest<CommandResponse>
+    public class QuestionUpdateRequest: CommandRequest, IRequest<CommandResponse>
     {
     }
 }

@@ -1,12 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using App.FantasyRealm.Domain;
+using App.FantasyRealm.Features;
+using Core.App.Features;
+using MediatR;
 
 namespace App.FantasyRealm.Question.Create
 {
-    internal class QuestionCreateHandler
+    public class QuestionCreateHandler : FantasyRealmDBHandler, IRequestHandler<QuestionCreateRequest, CommandResponse>
     {
+        public QuestionCreateHandler(FantasyRealmDBContext fantasyRealmDBContext) : base(fantasyRealmDBContext)
+        {
+        }
+
+        public Task<CommandResponse> Handle(QuestionCreateRequest request, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

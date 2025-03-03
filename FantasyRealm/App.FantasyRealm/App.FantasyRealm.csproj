@@ -29,9 +29,6 @@
     <Folder Include="QuestionChoice\Delete\" />
     <Folder Include="QuestionChoice\Query\" />
     <Folder Include="QuestionChoice\Update\" />
-    <Folder Include="Question\Delete\" />
-    <Folder Include="Question\Query\" />
-    <Folder Include="Question\Update\" />
   </ItemGroup>
 
 </Project>
