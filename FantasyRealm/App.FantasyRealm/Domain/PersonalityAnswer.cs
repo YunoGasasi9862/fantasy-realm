@@ -9,7 +9,7 @@ namespace App.FantasyRealm.Domain
 {
     public class PersonalityAnswer: Entity
     {
-        public int PersonalityId { get; set; }
+        public int PersonalityTypeId { get; set; }
 
         public int QuestionId { get; set; }
 

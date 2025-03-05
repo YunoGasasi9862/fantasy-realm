@@ -20,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
     <Folder Include="PersonalityAnswer\Create\" />
     <Folder Include="PersonalityAnswer\Delete\" />
     <Folder Include="PersonalityAnswer\Query\" />
