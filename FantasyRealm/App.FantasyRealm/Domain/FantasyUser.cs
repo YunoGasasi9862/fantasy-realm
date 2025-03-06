@@ -21,6 +21,6 @@ namespace App.FantasyRealm.Domain
 
         public DateTime DateOfBirth { get; set; }
 
-        public byte[] profilePicture { get; set; }
+        public string profilePicture { get; set; }
     }
 }

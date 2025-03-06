@@ -48,8 +48,8 @@ namespace App.FantasyRealm.Migrations
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("profilePicture")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("profilePicture")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

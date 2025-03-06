@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.FantasyRealm.Migrations
 {
     [DbContext(typeof(FantasyRealmDBContext))]
-    [Migration("20250305092218_v6")]
-    partial class v6
+    [Migration("20250306082836_v7")]
+    partial class v7
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,8 +51,8 @@ namespace App.FantasyRealm.Migrations
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("profilePicture")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("profilePicture")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
