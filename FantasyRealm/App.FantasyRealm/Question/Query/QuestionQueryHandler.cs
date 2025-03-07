@@ -1,5 +1,6 @@
 ﻿using App.FantasyRealm.Domain;
 using App.FantasyRealm.Features;
+using App.FantasyRealm.PersonalityType.Query;
 using MediatR;
 
 namespace App.FantasyRealm.Question.Query
@@ -12,7 +13,11 @@ namespace App.FantasyRealm.Question.Query
 
         public Task<IQueryable<QuestionQueryResponse>> Handle(QuestionQueryRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(fantasyRealmDBContext.Question.OrderBy(q => q.Verbiage).Select(q => new QuestionQueryResponse()
+            {
+                Id = q.Id,
+                Verbiage = q.Verbiage,
+            }));
         }
     }
 }

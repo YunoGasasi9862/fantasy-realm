@@ -2,6 +2,7 @@
 using App.FantasyRealm.Features;
 using Core.App.Features;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,20 @@ namespace App.FantasyRealm.Question.Delete
         {
         }
 
-        public Task<CommandResponse> Handle(QuestionDeleteRequest request, CancellationToken cancellationToken)
+        public async Task<CommandResponse> Handle(QuestionDeleteRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            Domain.Question question = await fantasyRealmDBContext.Question.SingleOrDefaultAsync(t => t.Id == request.Id, cancellationToken);
+
+            if (question is null) 
+            {
+                return (CommandResponse)Error($"Question: - {request.Verbiage} - does not exist!");
+            }
+
+            fantasyRealmDBContext.Question.Remove(question);
+
+            await fantasyRealmDBContext.SaveChangesAsync(cancellationToken);
+
+            return (CommandResponse)Success($"Question: {request.Verbiage} successfully removed!", request.Id);
         }
     }
 }

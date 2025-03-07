@@ -10,5 +10,6 @@ namespace App.FantasyRealm.Question.Delete
 {
     public class QuestionDeleteRequest: CommandRequest, IRequest<CommandResponse>
     {
+        public string Verbiage { get; set; }
     }
 }

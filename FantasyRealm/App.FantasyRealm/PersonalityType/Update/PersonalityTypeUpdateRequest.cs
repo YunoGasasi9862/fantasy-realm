@@ -12,10 +12,9 @@ namespace App.FantasyRealm.PersonalityType.Update
     public class PersonalityTypeUpdateRequest: CommandRequest, IRequest<CommandResponse>
     {
         [Required, StringLength(125)]
-
         public string Name { get; set; }
-        [Required, StringLength(125)]
 
+        [Required, StringLength(125)]
         public string Description { get; set; }
 
         public static Domain.PersonalityType Copy(PersonalityTypeUpdateRequest personalityTypeUpdateRequest, Domain.PersonalityType personalityType)
