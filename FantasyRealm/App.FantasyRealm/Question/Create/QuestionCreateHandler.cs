@@ -2,7 +2,9 @@
 using App.FantasyRealm.Domain;
 using App.FantasyRealm.Features;
 using Core.App.Features;
+using Core.App.Interfaces;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace App.FantasyRealm.Question.Create
 {
@@ -12,9 +14,20 @@ namespace App.FantasyRealm.Question.Create
         {
         }
 
-        public Task<CommandResponse> Handle(QuestionCreateRequest request, CancellationToken cancellationToken)
+        public async Task<CommandResponse> Handle(QuestionCreateRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            if (await fantasyRealmDBContext.Question.AnyAsync(p => p.Verbiage.ToUpper() == request.Verbiage.ToUpper().Trim(), cancellationToken))
+                return (CommandResponse) Error("Question with the same description exists!");
+
+
+            fantasyRealmDBContext.Question.Add(new Domain.Question
+            {
+                Verbiage = request.Verbiage.Trim(),
+            });
+
+            await fantasyRealmDBContext.SaveChangesAsync(cancellationToken);
+
+            return (CommandResponse)Success($"Question description: {request.ToString()} successfully created!", request.Id);
         }
     }
 }

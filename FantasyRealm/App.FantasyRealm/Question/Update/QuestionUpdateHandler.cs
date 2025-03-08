@@ -2,11 +2,7 @@
 using App.FantasyRealm.Features;
 using Core.App.Features;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace App.FantasyRealm.Question.Update
 {
@@ -16,9 +12,28 @@ namespace App.FantasyRealm.Question.Update
         {
         }
 
-        public Task<CommandResponse> Handle(QuestionUpdateRequest request, CancellationToken cancellationToken)
+        public async Task<CommandResponse> Handle(QuestionUpdateRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            if (await fantasyRealmDBContext.Question.AnyAsync(t => t.Id != request.Id && t.Verbiage.ToUpper() == request.Verbiage.ToUpper().Trim(), cancellationToken))
+            {
+                return (CommandResponse)Error($"Question - {request.Verbiage} - with the same description already exists in the database!");
+            }
+
+            var question = await fantasyRealmDBContext.Question.SingleOrDefaultAsync(t => t.Id == request.Id, cancellationToken);
+
+            if (question is null)
+            {
+                return (CommandResponse)Error($"Question - {request.Verbiage} - does not exist!");
+            }
+
+
+            question = QuestionUpdateRequest.Copy(request, question);
+
+            fantasyRealmDBContext.Question.Update(question);
+
+            await fantasyRealmDBContext.SaveChangesAsync(cancellationToken);
+
+            return (CommandResponse)Success($"Question description: {request.ToString()} successfully updated!", request.Id);
         }
     }
 }
