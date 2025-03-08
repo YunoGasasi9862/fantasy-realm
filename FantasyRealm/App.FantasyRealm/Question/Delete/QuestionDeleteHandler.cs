@@ -19,14 +19,14 @@ namespace App.FantasyRealm.Question.Delete
 
         public async Task<CommandResponse> Handle(QuestionDeleteRequest request, CancellationToken cancellationToken)
         {
-            Domain.Question question = await fantasyRealmDBContext.Question.SingleOrDefaultAsync(t => t.Id == request.Id, cancellationToken);
+            Domain.Question question = await fantasyRealmDBContext.Questions.SingleOrDefaultAsync(t => t.Id == request.Id, cancellationToken);
 
             if (question is null) 
             {
                 return (CommandResponse)Error($"Question: - {request.Verbiage} - does not exist!");
             }
 
-            fantasyRealmDBContext.Question.Remove(question);
+            fantasyRealmDBContext.Questions.Remove(question);
 
             await fantasyRealmDBContext.SaveChangesAsync(cancellationToken);
 

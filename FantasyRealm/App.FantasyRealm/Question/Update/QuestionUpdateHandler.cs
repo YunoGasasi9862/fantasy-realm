@@ -14,12 +14,12 @@ namespace App.FantasyRealm.Question.Update
 
         public async Task<CommandResponse> Handle(QuestionUpdateRequest request, CancellationToken cancellationToken)
         {
-            if (await fantasyRealmDBContext.Question.AnyAsync(t => t.Id != request.Id && t.Verbiage.ToUpper() == request.Verbiage.ToUpper().Trim(), cancellationToken))
+            if (await fantasyRealmDBContext.Questions.AnyAsync(t => t.Id != request.Id && t.Verbiage.ToUpper() == request.Verbiage.ToUpper().Trim(), cancellationToken))
             {
                 return (CommandResponse)Error($"Question - {request.Verbiage} - with the same description already exists in the database!");
             }
 
-            var question = await fantasyRealmDBContext.Question.SingleOrDefaultAsync(t => t.Id == request.Id, cancellationToken);
+            var question = await fantasyRealmDBContext.Questions.SingleOrDefaultAsync(t => t.Id == request.Id, cancellationToken);
 
             if (question is null)
             {
@@ -29,7 +29,7 @@ namespace App.FantasyRealm.Question.Update
 
             question = QuestionUpdateRequest.Copy(request, question);
 
-            fantasyRealmDBContext.Question.Update(question);
+            fantasyRealmDBContext.Questions.Update(question);
 
             await fantasyRealmDBContext.SaveChangesAsync(cancellationToken);
 

@@ -16,11 +16,11 @@ namespace App.FantasyRealm.Question.Create
 
         public async Task<CommandResponse> Handle(QuestionCreateRequest request, CancellationToken cancellationToken)
         {
-            if (await fantasyRealmDBContext.Question.AnyAsync(p => p.Verbiage.ToUpper() == request.Verbiage.ToUpper().Trim(), cancellationToken))
+            if (await fantasyRealmDBContext.Questions.AnyAsync(p => p.Verbiage.ToUpper() == request.Verbiage.ToUpper().Trim(), cancellationToken))
                 return (CommandResponse) Error("Question with the same description exists!");
 
 
-            fantasyRealmDBContext.Question.Add(new Domain.Question
+            fantasyRealmDBContext.Questions.Add(new Domain.Question
             {
                 Verbiage = request.Verbiage.Trim(),
             });
