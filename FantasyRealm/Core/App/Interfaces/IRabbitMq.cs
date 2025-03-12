@@ -1,12 +1,17 @@
-﻿namespace Core.App.Interfaces
+﻿using Core.App.Domain;
+using RabbitMQ.Client;
+
+namespace Core.App.Interfaces
 {
     public interface IRabbitMq
     {
-        public Task EstablishConnection();
+        public Task<IConnection> EstablishConnection(RabbitMq rabbitMqConfiguration);
 
         public Task DeprovisionConnection();
 
-        public Task GenerateQueue(string queue);
+        public Task<IChannel> GenerateChannel(IConnection connection);
+
+        public Task<QueueDeclareOk> GenerateQueue(IChannel channel, string queueName, bool durable, bool exclusive, bool autoDelete, bool passive, bool noWait, IDictionary<string, object?>? extraArguments = null, CancellationToken cancellationToken = default);
 
         public Task DiscardQueue(string queue);
 
