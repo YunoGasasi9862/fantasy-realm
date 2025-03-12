@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.App.Features;
+using System.ComponentModel.DataAnnotations;
 
 namespace App.FantasyRealm.QuestionChoice.Query
 {
-    internal class QuestionChoiceQueryResponse
+    public class QuestionChoiceQueryResponse : QueryResponse
     {
+        [Required]
+        public int QuestionId { get; set; }
+
+        [Required, StringLength(125)]
+        public string Choice { get; set; }
     }
 }
