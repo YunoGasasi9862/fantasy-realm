@@ -1,9 +1,11 @@
 ﻿using Core.App.Domain;
+using Core.App.Features;
+using MediatR;
 using System.ComponentModel.DataAnnotations;
 
 namespace App.FantasyRealm.QuestionChoice.Create
 {
-    public class QuestionChoiceCreateRequest
+    public class QuestionChoiceCreateRequest: CommandRequest, IRequest<CommandResponse>
     {
         [Required]
         public int QuestionId { get; set; }
