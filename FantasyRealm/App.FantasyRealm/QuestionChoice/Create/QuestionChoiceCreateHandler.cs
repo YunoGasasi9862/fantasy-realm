@@ -1,12 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using App.FantasyRealm.Domain;
+using App.FantasyRealm.Features;
+using Core.App.Features;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace App.FantasyRealm.QuestionChoice.Create
 {
-    internal class QuestionChoiceCreateHandler
+    public class QuestionChoiceCreateHandler : FantasyRealmDBHandler, IRequestHandler<QuestionChoiceCreateRequest, CommandResponse>
     {
+        public QuestionChoiceCreateHandler(FantasyRealmDBContext fantasyRealmDBContext) : base(fantasyRealmDBContext)
+        {
+        }
+
+        public async Task<CommandResponse> Handle(QuestionChoiceCreateRequest request, CancellationToken cancellationToken)
+        {
+            if (await fantasyRealmDBContext.QuestionChoices.AnyAsync(pt => pt.Choice.ToUpper() == request.Choice.ToUpper().Trim(), cancellationToken))
+            {
+                return (CommandResponse)Error($"Question Choice - {request.Choice} - already exists in the database!");
+            }
+
+            fantasyRealmDBContext.QuestionChoices.Add(new Domain.QuestionChoice
+            {
+                Choice = request.Choice,
+            });
+
+            await fantasyRealmDBContext.SaveChangesAsync(cancellationToken);
+
+            return (CommandResponse)Success($"Question Choice: {request.ToString()} successfully created!", request.Id);
+        }
     }
 }
