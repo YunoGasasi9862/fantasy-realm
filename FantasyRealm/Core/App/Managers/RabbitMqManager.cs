@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Core.App.Domain;
 using System.Diagnostics;
+using System.Text;
 
 namespace Core.App.Managers
 {
@@ -21,34 +22,50 @@ namespace Core.App.Managers
             RabbitMqConfiguration = rabbitMqConfiguration.Value;
 
         }
-        public Task DeprovisionConnection()
+        public async Task DeprovisionConnection(IConnection connection)
         {
-            throw new NotImplementedException();
+            if (connection.IsOpen)
+            {
+                await connection.CloseAsync();
+
+                connection.Dispose();
+            }
         }
 
-        public Task DiscardQueue(string queue)
+        public async Task PurgeQueue(IChannel channel, string queueName)
         {
-            throw new NotImplementedException();
+            await channel.QueuePurgeAsync(queueName);
         }
 
         public async Task<IConnection> EstablishConnection(RabbitMq rabbitMqConfiguration)
         {
-            ConnectionFactory connectionFactory = new ConnectionFactory
+            try
             {
-                UserName = rabbitMqConfiguration.Username,
-                HostName = rabbitMqConfiguration.HostName,
-                Password = rabbitMqConfiguration.Password,
-            };
+                ConnectionFactory connectionFactory = new ConnectionFactory
+                {
+                    UserName = rabbitMqConfiguration.Username,
+                    HostName = rabbitMqConfiguration.HostName,
+                    Password = rabbitMqConfiguration.Password,
+                };
 
-            return await connectionFactory.CreateConnectionAsync();
+                return await connectionFactory.CreateConnectionAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Exception: {ex.Message}");
+
+                throw new ApplicationException($"Exception Occured: {ex.Message}");
+            }
+
         }
 
-        //use QueueConfiguration here
-        public async Task<QueueDeclareOk> GenerateQueue(IChannel channel, string queueName, bool durable, bool exclusive, bool autoDelete, bool passive, bool noWait, IDictionary<string, object?>? extraArguments = null, CancellationToken cancellationToken = default)
+        public async Task<QueueDeclareOk> GenerateQueue(IChannel channel, QueueConfiguration queueConfiguration)
         {
             try
             {
-                return await channel.QueueDeclareAsync(queue: queueName, durable: false, exclusive: false, autoDelete: false, arguments: extraArguments, passive: passive, noWait: noWait, cancellationToken: cancellationToken);
+                return await channel.QueueDeclareAsync(queue: queueConfiguration.QueueName, durable: queueConfiguration.Durable, 
+                    exclusive: queueConfiguration.Exclusive, autoDelete: queueConfiguration.AutoDelete, arguments: queueConfiguration.ExtraArguments, 
+                    passive: queueConfiguration.Passive, noWait: queueConfiguration.NoWait, cancellationToken: queueConfiguration.CancellationToken);
 
             }catch (Exception ex)
             {
@@ -60,12 +77,43 @@ namespace Core.App.Managers
 
         public async Task<IChannel> GenerateChannel(IConnection connection)
         {
-           return await connection.CreateChannelAsync();
+            try
+            {
+                return await connection.CreateChannelAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Exception: {ex.Message}");
+
+                throw new ApplicationException($"Failed to Create the channel: {ex.Message}");
+            }
+        }
+        public async Task RemoveQueue(IChannel channel, string queueName)
+        {
+            await channel.QueueDeleteAsync(queueName);
+        }
+        
+        public async Task PublishMessage<T>(IChannel channel, string queue, T message, CancellationToken cancellationToken)
+        {
+            try
+            {
+                byte[] messageBytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
+               await channel.BasicPublishAsync(
+                        exchange: string.Empty, //default
+                        routingKey: queue,
+                        mandatory: true,
+                        body : messageBytes,
+                        cancellationToken: cancellationToken
+
+                );
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Exception: {ex.Message}");
+
+                throw new ApplicationException($"Failed to Publish the Message: {ex.Message}");
+            }
         }
 
-        public Task PublishMessage(string queue, object Message)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

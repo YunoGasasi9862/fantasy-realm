@@ -11,12 +11,12 @@ namespace Core.App.Interfaces
 
         public Task<IChannel> GenerateChannel(IConnection connection);
 
-        public Task<QueueDeclareOk> GenerateQueue(IChannel channel, string queueName, bool durable, bool exclusive, bool autoDelete, bool passive, bool noWait, IDictionary<string, object?>? extraArguments = null, CancellationToken cancellationToken = default);
+        public Task<QueueDeclareOk> GenerateQueue(IChannel channel, QueueConfiguration queueConfiguration);
 
-        public Task DiscardQueue(string queue);
+        public Task PurgeQueue(IChannel channel, string queueName);
 
-        //Might need to create Message Related Classes that are universal
-        //TO-DO
-        public Task PublishMessage(string queue, object Message);
+        public Task RemoveQueue(IChannel channel, string queueName);
+
+        public Task PublishMessage<T>(IChannel channel, string queue, T message, CancellationToken cancellationToken);
     }
 }
