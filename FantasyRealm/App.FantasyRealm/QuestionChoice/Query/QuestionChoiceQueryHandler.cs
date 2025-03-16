@@ -15,6 +15,7 @@ namespace App.FantasyRealm.QuestionChoice.Query
             return Task.FromResult(fantasyRealmDBContext.QuestionChoices.OrderBy(qc => qc.Choice).Select(qc => new QuestionChoiceQueryResponse()
             {
                 Id = qc.Id,
+                QuestionId = qc.QuestionId,
                 Choice = qc.Choice,
             }));
         }

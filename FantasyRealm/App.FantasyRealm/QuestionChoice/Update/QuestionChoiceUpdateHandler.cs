@@ -34,7 +34,7 @@ namespace App.FantasyRealm.QuestionChoice.Update
 
             await fantasyRealmDBContext.SaveChangesAsync(cancellationToken);
 
-            return (CommandResponse)Success($"Question Choice: {request.ToString()} successfully updated!", request.Id);
+            return (CommandResponse)Success($"Question Choice: {request.Choice.ToString()} successfully updated!", request.Id);
         }
     }
 }

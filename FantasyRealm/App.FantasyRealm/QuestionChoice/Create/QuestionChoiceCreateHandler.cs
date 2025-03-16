@@ -21,12 +21,13 @@ namespace App.FantasyRealm.QuestionChoice.Create
 
             fantasyRealmDBContext.QuestionChoices.Add(new Domain.QuestionChoice
             {
-                Choice = request.Choice,
+                QuestionId = request.QuestionId,
+                Choice = request.Choice.Trim(),
             });
 
             await fantasyRealmDBContext.SaveChangesAsync(cancellationToken);
 
-            return (CommandResponse)Success($"Question Choice: {request.ToString()} successfully created!", request.Id);
+            return (CommandResponse)Success($"Question Choice: {request.Choice.ToString()} successfully created!", request.Id);
         }
     }
 }
