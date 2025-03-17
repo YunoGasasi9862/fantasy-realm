@@ -27,7 +27,7 @@ namespace App.FantasyRealm.Question.Create
 
             await fantasyRealmDBContext.SaveChangesAsync(cancellationToken);
 
-            return (CommandResponse)Success($"Question description: {request.ToString()} successfully created!", request.Id);
+            return (CommandResponse)Success($"Question description: {request.Verbiage.ToString()} successfully created!", request.Id);
         }
     }
 }

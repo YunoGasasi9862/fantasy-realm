@@ -33,7 +33,7 @@ namespace App.FantasyRealm.Question.Update
 
             await fantasyRealmDBContext.SaveChangesAsync(cancellationToken);
 
-            return (CommandResponse)Success($"Question description: {request.ToString()} successfully updated!", request.Id);
+            return (CommandResponse)Success($"Question description: {request.Verbiage.ToString()} successfully updated!", request.Id);
         }
     }
 }
