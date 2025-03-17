@@ -8,13 +8,19 @@ namespace App.FantasyRealm.FantasyUser.Create
 {
     public class FantasyUserCreateHandler : FantasyRealmDBHandler, IRequestHandler<FantasyUserCreateRequest, CommandResponse>
     {
+        //inject RabbitMQ Processor here
         public FantasyUserCreateHandler(FantasyRealmDBContext fantasyRealmDBContext) : base(fantasyRealmDBContext)
         {
         }
 
-        public Task<CommandResponse> Handle(FantasyUserCreateRequest request, CancellationToken cancellationToken)
+        public async Task<CommandResponse> Handle(FantasyUserCreateRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            //here create the FantasyUser and then use the RabbitMqs processor to delegate it to another API, or a class
+            //that needs to do some sort of preprocessing, or executes a subsequent action
+
+
+            //update the messages
+            return (CommandResponse)Success("Successful", request.Id);
         }
     }
 }

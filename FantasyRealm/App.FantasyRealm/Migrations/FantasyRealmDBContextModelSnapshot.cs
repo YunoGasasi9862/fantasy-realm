@@ -104,7 +104,7 @@ namespace App.FantasyRealm.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("personalityAnswers");
+                    b.ToTable("PersonalityAnswers");
                 });
 
             modelBuilder.Entity("App.FantasyRealm.Domain.PersonalityType", b =>
@@ -117,8 +117,8 @@ namespace App.FantasyRealm.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(125)
-                        .HasColumnType("nvarchar(125)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Name")
                         .IsRequired()

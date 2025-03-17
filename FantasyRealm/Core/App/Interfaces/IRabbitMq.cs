@@ -7,11 +7,11 @@ namespace Core.App.Interfaces
     {
         public Task<IConnection> EstablishConnection(RabbitMq rabbitMqConfiguration);
 
-        public Task DeprovisionConnection();
+        public Task DeprovisionConnection(IConnection connection);
 
-        public Task<IChannel> GenerateChannel(IConnection connection);
+        public Task<IChannel> CreateChannel(IConnection connection);
 
-        public Task<QueueDeclareOk> GenerateQueue(IChannel channel, QueueConfiguration queueConfiguration);
+        public Task<QueueDeclareOk> CreateQueue(IChannel channel, QueueConfiguration queueConfiguration);
 
         public Task PurgeQueue(IChannel channel, string queueName);
 

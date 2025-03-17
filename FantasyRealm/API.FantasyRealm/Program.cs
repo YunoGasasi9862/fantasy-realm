@@ -2,6 +2,7 @@ using App.FantasyRealm.Domain;
 using App.FantasyRealm.Features;
 using Core.App.Interfaces;
 using Core.App.Managers;
+using Core.App.Processors;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ var connectionString = builder.Configuration.GetConnectionString("FantasyRalmDBC
 builder.Services.AddDbContext<FantasyRealmDBContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(FantasyRealmDBHandler).Assembly));
 builder.Services.AddSingleton<IRabbitMq, RabbitMqManager>();
+builder.Services.AddSingleton<IRabbitMqProcessor, RabbitMqProcessor>();
 // Add services to the container.
 
 builder.Services.AddControllers();

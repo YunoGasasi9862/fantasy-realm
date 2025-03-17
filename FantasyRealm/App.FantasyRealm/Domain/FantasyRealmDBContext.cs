@@ -15,7 +15,7 @@ namespace App.FantasyRealm.Domain
 
         public DbSet<QuestionChoice> QuestionChoices { get; set; }
 
-        public DbSet<PersonalityAnswer> personalityAnswers { get; set; }
+        public DbSet<PersonalityAnswer> PersonalityAnswers { get; set; }
 
         public FantasyRealmDBContext(DbContextOptions<FantasyRealmDBContext> dbContextOptions) : base(dbContextOptions)
         {

@@ -8,7 +8,7 @@ namespace App.FantasyRealm.Domain
         [Required, StringLength(125)]
         public string Name { get; set; }
 
-        [Required, StringLength(125)]
+        [Required, StringLength(255)]
         public string Description { get; set; }
 
         public override string ToString()

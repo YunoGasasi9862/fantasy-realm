@@ -10,5 +10,21 @@ namespace App.FantasyRealm.FantasyUser.Update
 {
     public class FantasyUserUpdateRequest: CommandRequest, IRequest<CommandResponse>
     {
+        //remove add properties if you want to, but for now adding the same ones
+        public FantasyUserUpdateRequest() { }
+        public string Name { get; set; }
+
+        public string Surname { get; set; }
+
+        public string Username { get; set; }
+
+        public string Email { get; set; }
+
+        public string Password { get; set; }
+
+        public DateTime DateOfBirth { get; set; }
+
+        //path
+        public string profilePicture { get; set; }
     }
 }

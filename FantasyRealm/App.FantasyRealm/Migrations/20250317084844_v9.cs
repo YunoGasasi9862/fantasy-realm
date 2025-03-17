@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace App.FantasyRealm.Migrations
 {
     /// <inheritdoc />
-    public partial class v7 : Migration
+    public partial class v9 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -37,7 +37,7 @@ namespace App.FantasyRealm.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(125)", maxLength: 125, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(125)", maxLength: 125, nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -104,7 +104,7 @@ namespace App.FantasyRealm.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "personalityAnswers",
+                name: "PersonalityAnswers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -115,21 +115,21 @@ namespace App.FantasyRealm.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_personalityAnswers", x => x.Id);
+                    table.PrimaryKey("PK_PersonalityAnswers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_personalityAnswers_PersonalityTypes_PersonalityTypeId",
+                        name: "FK_PersonalityAnswers_PersonalityTypes_PersonalityTypeId",
                         column: x => x.PersonalityTypeId,
                         principalTable: "PersonalityTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_personalityAnswers_QuestionChoices_ChoiceId",
+                        name: "FK_PersonalityAnswers_QuestionChoices_ChoiceId",
                         column: x => x.ChoiceId,
                         principalTable: "QuestionChoices",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_personalityAnswers_Questions_QuestionId",
+                        name: "FK_PersonalityAnswers_Questions_QuestionId",
                         column: x => x.QuestionId,
                         principalTable: "Questions",
                         principalColumn: "Id",
@@ -147,18 +147,18 @@ namespace App.FantasyRealm.Migrations
                 column: "PersonalityTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_personalityAnswers_ChoiceId",
-                table: "personalityAnswers",
+                name: "IX_PersonalityAnswers_ChoiceId",
+                table: "PersonalityAnswers",
                 column: "ChoiceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_personalityAnswers_PersonalityTypeId",
-                table: "personalityAnswers",
+                name: "IX_PersonalityAnswers_PersonalityTypeId",
+                table: "PersonalityAnswers",
                 column: "PersonalityTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_personalityAnswers_QuestionId",
-                table: "personalityAnswers",
+                name: "IX_PersonalityAnswers_QuestionId",
+                table: "PersonalityAnswers",
                 column: "QuestionId");
 
             migrationBuilder.CreateIndex(
@@ -174,7 +174,7 @@ namespace App.FantasyRealm.Migrations
                 name: "FantsayUserPersonalityAssociations");
 
             migrationBuilder.DropTable(
-                name: "personalityAnswers");
+                name: "PersonalityAnswers");
 
             migrationBuilder.DropTable(
                 name: "FantasyUsers");

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.FantasyRealm.Migrations
 {
     [DbContext(typeof(FantasyRealmDBContext))]
-    [Migration("20250306082836_v7")]
-    partial class v7
+    [Migration("20250317084844_v9")]
+    partial class v9
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,7 +107,7 @@ namespace App.FantasyRealm.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("personalityAnswers");
+                    b.ToTable("PersonalityAnswers");
                 });
 
             modelBuilder.Entity("App.FantasyRealm.Domain.PersonalityType", b =>
@@ -120,8 +120,8 @@ namespace App.FantasyRealm.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(125)
-                        .HasColumnType("nvarchar(125)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Name")
                         .IsRequired()

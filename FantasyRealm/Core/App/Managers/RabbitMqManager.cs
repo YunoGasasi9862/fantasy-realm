@@ -59,7 +59,7 @@ namespace Core.App.Managers
 
         }
 
-        public async Task<QueueDeclareOk> GenerateQueue(IChannel channel, QueueConfiguration queueConfiguration)
+        public async Task<QueueDeclareOk> CreateQueue(IChannel channel, QueueConfiguration queueConfiguration)
         {
             try
             {
@@ -75,7 +75,7 @@ namespace Core.App.Managers
             }
         }
 
-        public async Task<IChannel> GenerateChannel(IConnection connection)
+        public async Task<IChannel> CreateChannel(IConnection connection)
         {
             try
             {
@@ -97,7 +97,7 @@ namespace Core.App.Managers
         {
             try
             {
-                byte[] messageBytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
+               byte[] messageBytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
                await channel.BasicPublishAsync(
                         exchange: string.Empty, //default
                         routingKey: queue,
@@ -114,6 +114,5 @@ namespace Core.App.Managers
                 throw new ApplicationException($"Failed to Publish the Message: {ex.Message}");
             }
         }
-
     }
 }
