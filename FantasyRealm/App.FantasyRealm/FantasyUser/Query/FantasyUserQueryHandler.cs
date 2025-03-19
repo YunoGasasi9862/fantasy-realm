@@ -12,7 +12,17 @@ namespace App.FantasyRealm.FantasyUser.Query
 
         Task<IQueryable<FantasyUserQueryResponse>> IRequestHandler<FantasyUserQueryRequest, IQueryable<FantasyUserQueryResponse>>.Handle(FantasyUserQueryRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(fantasyRealmDBContext.FantasyUsers.OrderBy(fu => fu.Name).Select(fu => new FantasyUserQueryResponse()
+            {
+                Id = fu.Id,
+                Name = fu.Name,
+                Surname = fu.Surname,
+                Username = fu.Username,
+                Email = fu.Email,
+                Password = fu.Password,
+                DateOfBirth = fu.DateOfBirth,
+                ProfilePicture = fu.profilePicture,
+            }));
         }
     }
 }

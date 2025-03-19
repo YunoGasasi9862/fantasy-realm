@@ -26,5 +26,24 @@ namespace App.FantasyRealm.FantasyUser.Update
 
         //path
         public string profilePicture { get; set; }
+
+        public static Domain.FantasyUser Copy(FantasyUserUpdateRequest fantasyUserUpdateRequest, Domain.FantasyUser fantasyUser)
+        {
+            fantasyUser.Name = fantasyUserUpdateRequest.Name.Trim();
+            fantasyUser.Surname = fantasyUserUpdateRequest.Surname.Trim();
+            fantasyUser.Username = fantasyUserUpdateRequest.Username.Trim();
+            fantasyUser.Email = fantasyUserUpdateRequest.Email.Trim();
+            fantasyUser.Password = fantasyUserUpdateRequest.Password.Trim();
+            fantasyUser.DateOfBirth = fantasyUserUpdateRequest.DateOfBirth;
+            fantasyUser.profilePicture = fantasyUserUpdateRequest.profilePicture.Trim();
+            fantasyUser.Id = fantasyUserUpdateRequest.Id;
+
+            return fantasyUser;
+        }
+
+        public override string ToString()
+        {
+            return $"Id: {Id}, Name: {Name}, Surname: {Surname}, Username: {Username}, Email: {Email}, Password: {Password}, DateOfBirth: {DateOfBirth}, profilePicture: {profilePicture},";
+        }
     }
 }
