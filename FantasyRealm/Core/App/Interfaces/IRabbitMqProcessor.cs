@@ -8,7 +8,7 @@ namespace Core.App.Interfaces
 {
     public interface IRabbitMqProcessor
     {
-        public Task EstablishConnectionOnQueue();
-        public Task ProcessQueue(string QueueName);
+        public Task EstablishConnectionOnQueue(string queueName);
+        public Task ProcessQueue(string queueName);
     }
 }

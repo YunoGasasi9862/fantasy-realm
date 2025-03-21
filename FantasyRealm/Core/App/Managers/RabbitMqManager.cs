@@ -1,25 +1,17 @@
 ﻿using Core.App.Interfaces;
 using RabbitMQ.Client;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Core.App.Domain;
 using System.Diagnostics;
 using System.Text;
+using RabbitMQ.Client.Exceptions;
 
 namespace Core.App.Managers
 {
     public class RabbitMqManager : IRabbitMq
     {
-        //use cloudAMQP for connecting etc
-        protected IConnection? Connection { get; set; }
-        protected IChannel? Channel { get; set; }   
-        protected RabbitMq? RabbitMqConfiguration { get; set; }
-
-        public RabbitMqManager(IOptions<RabbitMq> rabbitMqConfiguration)
+        public RabbitMqManager()
         {
-            //get connection values from app.settings or any other settings file
-            //use RabbitMqConfig model
-            RabbitMqConfiguration = rabbitMqConfiguration.Value;
 
         }
         public async Task DeprovisionConnection(IConnection connection)
@@ -37,7 +29,7 @@ namespace Core.App.Managers
             await channel.QueuePurgeAsync(queueName);
         }
 
-        public async Task<IConnection> EstablishConnection(RabbitMq rabbitMqConfiguration)
+        public async Task<IConnection> EstablishConnection(RabbitMqConfiguration rabbitMqConfiguration)
         {
             try
             {
@@ -112,6 +104,19 @@ namespace Core.App.Managers
                 Debug.WriteLine($"Exception: {ex.Message}");
 
                 throw new ApplicationException($"Failed to Publish the Message: {ex.Message}");
+            }
+        }
+
+        public async Task<QueueDeclareOk?> GetQueueIfExists(IChannel channel, string queueName)
+        {
+            try
+            {
+                //checks if a queue exist if so returns it
+                return await channel.QueueDeclarePassiveAsync(queueName);
+
+            }catch (OperationInterruptedException ex)
+            {
+                return null;
             }
         }
     }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Core.App.Domain
 {
-    public class RabbitMq
+    public class RabbitMqConfiguration
     {
-        public RabbitMq() { }
+        public RabbitMqConfiguration() { }
         public string HostName { get; set; }
 
         public string Username { get; set; }

@@ -5,7 +5,7 @@ namespace Core.App.Interfaces
 {
     public interface IRabbitMq
     {
-        public Task<IConnection> EstablishConnection(RabbitMq rabbitMqConfiguration);
+        public Task<IConnection> EstablishConnection(RabbitMqConfiguration rabbitMqConfiguration);
 
         public Task DeprovisionConnection(IConnection connection);
 
@@ -16,6 +16,8 @@ namespace Core.App.Interfaces
         public Task PurgeQueue(IChannel channel, string queueName);
 
         public Task RemoveQueue(IChannel channel, string queueName);
+
+        public Task<QueueDeclareOk?> GetQueueIfExists(IChannel channel, string queueName);
 
         public Task PublishMessage<T>(IChannel channel, string queue, T message, CancellationToken cancellationToken);
     }
