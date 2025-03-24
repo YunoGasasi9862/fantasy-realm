@@ -1,5 +1,6 @@
 using App.FantasyRealm.Domain;
 using App.FantasyRealm.Features;
+using Core.App.Domain;
 using Core.App.Interfaces;
 using Core.App.Managers;
 using Core.App.Processors;
@@ -8,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
+
+builder.Services.Configure<RabbitMqConfiguration>(builder.Configuration.GetSection("RabbitMqConfiguration"));
 
 var connectionString = builder.Configuration.GetConnectionString("FantasyRalmDBConnectionString");
 builder.Services.AddDbContext<FantasyRealmDBContext>(options => options.UseSqlServer(connectionString));

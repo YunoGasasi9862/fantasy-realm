@@ -18,5 +18,10 @@ namespace Core.App.Domain
         public int Port { get; set; }
 
         public string URL { get; set; }
+
+        public override string ToString()
+        {
+            return $"ConnectionConfig: HostName {HostName} Username {Username} Password {Password} Port {Port} URL {URL}";
+        }
     }
 }

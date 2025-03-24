@@ -16,8 +16,8 @@ namespace Core.App.Processors
 
         private QueueConfiguration QueueConfiguration { get; set; }
 
-        public RabbitMqProcessor(IRabbitMq rabbitMq, IOptions<RabbitMqConfiguration> rabbitMqConfiguration) {
-
+        public RabbitMqProcessor(IRabbitMq rabbitMq, IOptions<RabbitMqConfiguration> rabbitMqConfiguration)
+        {
             RabbitMqManager = rabbitMq;
             RabbitMqConfiguration = rabbitMqConfiguration.Value;
 
@@ -29,6 +29,7 @@ namespace Core.App.Processors
         {
             try
             {
+                //check what might be happening here!
                 Connection = await RabbitMqManager.EstablishConnection(RabbitMqConfiguration);
 
                 Channel = await RabbitMqManager.CreateChannel(Connection);

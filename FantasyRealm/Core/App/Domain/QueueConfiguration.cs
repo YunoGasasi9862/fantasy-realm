@@ -22,5 +22,10 @@ namespace Core.App.Domain
         {
             QueueName = queueName;
         }
+
+        public override string ToString()
+        {
+            return $"QueueConfiguratin: QueueName - {QueueName} Durable - {Durable} Exclusive - {Exclusive} AutoDelete - {AutoDelete} Passive {Passive} NoWait {NoWait} ExtraArguments {ExtraArguments} CancellationToken {CancellationToken}";
+        }
     }
 }
