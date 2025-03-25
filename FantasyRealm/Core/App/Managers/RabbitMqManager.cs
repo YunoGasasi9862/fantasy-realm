@@ -35,8 +35,10 @@ namespace Core.App.Managers
             {
                 ConnectionFactory connectionFactory = new ConnectionFactory
                 {
-                    Uri = new Uri(rabbitMqConfiguration.URL),
                     VirtualHost = rabbitMqConfiguration.VirtualHost,
+                    UserName = rabbitMqConfiguration.Username,
+                    Password = rabbitMqConfiguration.Password,
+                    HostName = rabbitMqConfiguration.HostName,
                     Port = rabbitMqConfiguration.Port,
                     Ssl = new SslOption()
                     {
