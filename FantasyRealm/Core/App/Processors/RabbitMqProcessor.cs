@@ -37,7 +37,7 @@ namespace Core.App.Processors
                 //update queueName
                 QueueConfiguration.UpdateQueueName(queueName);
 
-                QueueDeclareOk queueDeclareOk = await RabbitMqManager.GetQueueIfExists(Channel, queueName) ?? await RabbitMqManager.CreateQueue(Channel, QueueConfiguration);
+                QueueDeclareOk queueDeclareOk = await RabbitMqManager.GetQueueIfExists(Connection, queueName) ?? await RabbitMqManager.CreateQueue(Channel, QueueConfiguration);
 
             }
             catch(Exception ex)

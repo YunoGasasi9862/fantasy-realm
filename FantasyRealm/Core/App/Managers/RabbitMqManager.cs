@@ -35,9 +35,14 @@ namespace Core.App.Managers
             {
                 ConnectionFactory connectionFactory = new ConnectionFactory
                 {
-                    UserName = rabbitMqConfiguration.Username,
-                    HostName = rabbitMqConfiguration.HostName,
-                    Password = rabbitMqConfiguration.Password,
+                    Uri = new Uri(rabbitMqConfiguration.URL),
+                    VirtualHost = rabbitMqConfiguration.VirtualHost,
+                    Port = rabbitMqConfiguration.Port,
+                    Ssl = new SslOption()
+                    {
+                        Enabled = rabbitMqConfiguration.EnableSSL,
+                        ServerName = rabbitMqConfiguration.HostName
+                    }
                 };
 
                 return await connectionFactory.CreateConnectionAsync();
@@ -61,7 +66,7 @@ namespace Core.App.Managers
 
             }catch (Exception ex)
             {
-                Debug.WriteLine($"Exception: {ex.Message}");
+                Debug.WriteLine($"Exception On Creating Queue: {ex.Message}");
 
                 throw new ApplicationException($"Exception Occured: {ex.Message}");
             }
@@ -107,12 +112,12 @@ namespace Core.App.Managers
             }
         }
 
-        public async Task<QueueDeclareOk?> GetQueueIfExists(IChannel channel, string queueName)
+        public async Task<QueueDeclareOk?> GetQueueIfExists(IConnection connection, string queueName)
         {
             try
             {
-                //checks if a queue exist if so returns it
-                return await channel.QueueDeclarePassiveAsync(queueName);
+                //checks if a queue exist if so returns it (on a new fresh channel to prevent closure of existing channels)
+                return await (await CreateChannel(connection)).QueueDeclarePassiveAsync(queueName);
 
             }catch (OperationInterruptedException ex)
             {

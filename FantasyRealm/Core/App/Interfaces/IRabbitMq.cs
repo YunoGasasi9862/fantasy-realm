@@ -17,7 +17,7 @@ namespace Core.App.Interfaces
 
         public Task RemoveQueue(IChannel channel, string queueName);
 
-        public Task<QueueDeclareOk?> GetQueueIfExists(IChannel channel, string queueName);
+        public Task<QueueDeclareOk?> GetQueueIfExists(IConnection connection, string queueName);
 
         public Task PublishMessage<T>(IChannel channel, string queue, T message, CancellationToken cancellationToken);
     }
