@@ -2,42 +2,46 @@
 using Core.App.Interfaces;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System.Diagnostics;
+using System.Text;
+using System.Text.Json;
 
 namespace Core.App.Processors
 {
     public class RabbitMqProcessor : IRabbitMqProcessor
     {
-        //use cloudAMQP for connecting etc
-        private IConnection? Connection { get; set; }
-        private IChannel? Channel { get; set; }
         private IRabbitMq RabbitMqManager { get; set; }
         private RabbitMqConfiguration RabbitMqConfiguration { get; set; }
-
         private QueueConfiguration QueueConfiguration { get; set; }
 
         public RabbitMqProcessor(IRabbitMq rabbitMq, IOptions<RabbitMqConfiguration> rabbitMqConfiguration)
         {
             RabbitMqManager = rabbitMq;
+
             RabbitMqConfiguration = rabbitMqConfiguration.Value;
 
-            //declare a default instance with default values
             QueueConfiguration = new QueueConfiguration();
         }
 
-        public async Task EstablishConnectionOnQueue(string queueName)
+        public async Task<RabbitMqProcessorPackage> EstablishConnectionOnQueue(string queueName)
         {
             try
             {
-                //check what might be happening here!
-                Connection = await RabbitMqManager.EstablishConnection(RabbitMqConfiguration);
+                IConnection connection = await RabbitMqManager.EstablishConnection(RabbitMqConfiguration);
 
-                Channel = await RabbitMqManager.CreateChannel(Connection);
+                IChannel channel = await RabbitMqManager.CreateChannel(connection);
 
-                //update queueName
                 QueueConfiguration.UpdateQueueName(queueName);
 
-                QueueDeclareOk queueDeclareOk = await RabbitMqManager.GetQueueIfExists(Connection, queueName) ?? await RabbitMqManager.CreateQueue(Channel, QueueConfiguration);
+                QueueDeclareOk queueDeclareOk = await RabbitMqManager.GetQueueIfExists(connection, queueName) ?? await RabbitMqManager.CreateQueue(channel, QueueConfiguration);
+
+                return new RabbitMqProcessorPackage
+                {
+                    QueueDeclareOk = queueDeclareOk,
+                    Connection = connection,
+                    Channel = channel
+                };
 
             }
             catch(Exception ex)
@@ -47,9 +51,36 @@ namespace Core.App.Processors
             }
         }
 
-        public Task ProcessQueue(string QueueName)
+        //will run indefinitely - that's how rabbitMq's consumer architecture is
+        //here T is the DataType
+        public async Task ProcessQueue<T>(IChannel channel, string queueName)
         {
-            throw new NotImplementedException();
+            AsyncEventingBasicConsumer asyncEventingBasicConsumer = new AsyncEventingBasicConsumer(channel);
+
+            //registers an event handler - ReceiveData. Sender is the consumer, and the basicDeveliverEventArgs has delivery tag etc
+
+            asyncEventingBasicConsumer.ReceivedAsync += async (sender, basicDeliverEventArgs) => await ReceiveData<T>(channel, basicDeliverEventArgs);
+
+            await channel.BasicConsumeAsync(queue: queueName, autoAck: false, consumer: asyncEventingBasicConsumer);
+        }
+
+        private async Task ReceiveData<T>(IChannel channel, BasicDeliverEventArgs basicDeliverEventArgs)
+        {
+            try
+            {
+                string dataInString = Encoding.UTF8.GetString(basicDeliverEventArgs.Body.ToArray());
+
+                T? castedData = JsonSerializer.Deserialize<T>(dataInString);
+
+                await channel.BasicAckAsync(basicDeliverEventArgs.DeliveryTag, false);
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Exception Occured: {ex.Message}");
+                throw;
+            }
+
         }
     }
 }
