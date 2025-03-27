@@ -22,37 +22,17 @@ namespace Core.App.Processors
             RabbitMqConfiguration = rabbitMqConfiguration.Value;
 
             QueueConfiguration = new QueueConfiguration();
+
         }
 
         public async Task<RabbitMqProcessorPackage> EstablishConnectionOnQueue(string queueName)
         {
-            try
-            {
-                IConnection connection = await RabbitMqManager.EstablishConnection(RabbitMqConfiguration);
-
-                IChannel channel = await RabbitMqManager.CreateChannel(connection);
-
-                QueueConfiguration.UpdateQueueName(queueName);
-
-                QueueDeclareOk queueDeclareOk = await RabbitMqManager.GetQueueIfExists(connection, queueName) ?? await RabbitMqManager.CreateQueue(channel, QueueConfiguration);
-
-                return new RabbitMqProcessorPackage
-                {
-                    QueueDeclareOk = queueDeclareOk,
-                    Connection = connection,
-                    Channel = channel
-                };
-
-            }
-            catch(Exception ex)
-            {
-                Debug.WriteLine($"Exception Occured: {ex.Message}");
-                throw;
-            }
+            return await RabbitMqManager.EstablishConnectionOnQueue(RabbitMqConfiguration, QueueConfiguration, queueName);
         }
 
         //will run indefinitely - that's how rabbitMq's consumer architecture is
         //here T is the DataType
+
         public async Task ProcessQueue<T>(IChannel channel, string queueName)
         {
             AsyncEventingBasicConsumer asyncEventingBasicConsumer = new AsyncEventingBasicConsumer(channel);

@@ -14,6 +14,7 @@ namespace Core.App.Managers
         {
 
         }
+
         public async Task DeprovisionConnection(IConnection connection)
         {
             if (connection.IsOpen)
@@ -124,6 +125,33 @@ namespace Core.App.Managers
             }catch (OperationInterruptedException ex)
             {
                 return null;
+            }
+        }
+
+        public async Task<RabbitMqProcessorPackage> EstablishConnectionOnQueue(RabbitMqConfiguration rabbitMqConfiguration, QueueConfiguration queueConfiguration, string queueName)
+        {
+            try
+            {
+                IConnection connection = await EstablishConnection(rabbitMqConfiguration);
+
+                IChannel channel = await CreateChannel(connection);
+
+                queueConfiguration.UpdateQueueName(queueName);
+
+                QueueDeclareOk queueDeclareOk = await GetQueueIfExists(connection, queueName) ?? await CreateQueue(channel, queueConfiguration);
+
+                return new RabbitMqProcessorPackage
+                {
+                    QueueDeclareOk = queueDeclareOk,
+                    Connection = connection,
+                    Channel = channel
+                };
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Exception Occured: {ex.Message}");
+                throw;
             }
         }
     }

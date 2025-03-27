@@ -20,5 +20,7 @@ namespace Core.App.Interfaces
         public Task<QueueDeclareOk?> GetQueueIfExists(IConnection connection, string queueName);
 
         public Task PublishMessage<T>(IChannel channel, string queue, T message, CancellationToken cancellationToken);
+
+        public Task<RabbitMqProcessorPackage> EstablishConnectionOnQueue(RabbitMqConfiguration rabbitMqConfiguration, QueueConfiguration queueConfiguration, string queueName);
     }
 }
