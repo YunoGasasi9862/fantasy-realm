@@ -25,7 +25,7 @@ namespace Core.App.Processors
 
         }
 
-        public async Task<RabbitMqProcessorPackage> EstablishConnectionOnQueue(string queueName)
+        public async Task<RabbitMqDataPackage> EstablishConnectionOnQueue(string queueName)
         {
             return await RabbitMqManager.EstablishConnectionOnQueue(RabbitMqConfiguration, QueueConfiguration, queueName);
         }

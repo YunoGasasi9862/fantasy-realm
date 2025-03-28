@@ -21,9 +21,14 @@ namespace Core.App.Publishers
             QueueConfiguration = new QueueConfiguration();
         }
 
-        public Task PublishMessage<T>(IChannel channel, string queueName)
+        public async Task PublishMessage<T>(IChannel channel, string queueName, T data, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+           await RabbitMqManager.PublishMessage<T>(channel, queueName, data, cancellationToken);
+        }
+
+        public async Task<RabbitMqDataPackage> EstablishConnectionOnQueue(string queueName)
+        {
+            return await RabbitMqManager.EstablishConnectionOnQueue(RabbitMqConfiguration, QueueConfiguration, queueName);
         }
     }
 }

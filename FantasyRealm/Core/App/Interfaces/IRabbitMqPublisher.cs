@@ -1,14 +1,9 @@
 ﻿using RabbitMQ.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.App.Interfaces
 {
-    public interface IRabbitMqPublisher
+    public interface IRabbitMqPublisher: IRabbitMqWorker
     {
-        public Task PublishMessage<T>(IChannel channel, string queueName);
+        public Task PublishMessage<T>(IChannel channel, string queueName, T data, CancellationToken cancellationToken);
     }
 }

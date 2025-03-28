@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.App.Domain
 {
-    public class RabbitMqProcessorPackage
+    public class RabbitMqDataPackage
     {
         public IConnection? Connection { get; set; }
         public IChannel? Channel { get; set; }

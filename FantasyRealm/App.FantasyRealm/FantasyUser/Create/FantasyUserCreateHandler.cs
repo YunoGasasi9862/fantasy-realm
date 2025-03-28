@@ -13,24 +13,27 @@ namespace App.FantasyRealm.FantasyUser.Create
 {
     public class FantasyUserCreateHandler : FantasyRealmDBHandler, IRequestHandler<FantasyUserCreateRequest, CommandResponse>
     {
-        //inject RabbitMQ Processor here
-        private IRabbitMqProcessor RabbitMqProcessor { get; set; }
-        public FantasyUserCreateHandler(FantasyRealmDBContext fantasyRealmDBContext, IRabbitMqProcessor rabbitMqProcessor) : base(fantasyRealmDBContext)
+        //inject RabbitMQ Publisher pocessor here
+        private IRabbitMqPublisher RabbitMqPublisher { get; set; }
+        private CancellationToken CancellationToken { get; set; }
+        private CancellationTokenSource CancellationTokenSource { get; set; }
+        public FantasyUserCreateHandler(FantasyRealmDBContext fantasyRealmDBContext, IRabbitMqPublisher rabbitMqPublisher) : base(fantasyRealmDBContext)
         {
-            RabbitMqProcessor = rabbitMqProcessor;
+            RabbitMqPublisher = rabbitMqPublisher;
+
+            CancellationTokenSource = new CancellationTokenSource();
+
+            CancellationToken = CancellationTokenSource.Token;
         }
 
         public async Task<CommandResponse> Handle(FantasyUserCreateRequest request, CancellationToken cancellationToken)
         {
-            //here create the FantasyUser and then use the RabbitMqs processor to delegate it to another API, or a class
-            //that needs to do some sort of preprocessing, or executes a subsequent action
-
             if (await fantasyRealmDBContext.FantasyUsers.AnyAsync(fu => fu.Email == request.Email.Trim(), cancellationToken))
             {
                 return (CommandResponse)Error($"A user already Exists with the email {request.Email}");
             }
 
-            fantasyRealmDBContext.FantasyUsers.Add(new Domain.FantasyUser()
+            Domain.FantasyUser fantasyUser = new Domain.FantasyUser()
             {
                 Password = request.Password.Trim(), //use encryption if possible
                 profilePicture = request.profilePicture,
@@ -39,17 +42,18 @@ namespace App.FantasyRealm.FantasyUser.Create
                 Username = request.Username.Trim(),
                 DateOfBirth = DateTime.Parse(request.DateOfBirth.ToString()),
                 Email = request.Email.Trim(),
-            });
+
+            };
+
+            fantasyRealmDBContext.FantasyUsers.Add(fantasyUser);
 
             await fantasyRealmDBContext.SaveChangesAsync(cancellationToken);
-            //once done, use rabbitMq
-            RabbitMqProcessorPackage rabbitMqProcessorPackage = await RabbitMqProcessor.EstablishConnectionOnQueue(FantasyUserConstants.CREATE_USER_NOTIFICAITON_QUEUE_NAME);
 
-            //rum the processor - also change the type later, for now its string
-            ///await RabbitMqProcessor.ProcessQueue<string>(rabbitMqProcessorPackage.Channel, FantasyUserConstants.CREATE_USER_NOTIFICAITON_QUEUE_NAME);
+            //queuing the object for later use by the consumer/processor
+            RabbitMqDataPackage rabbitMqProcessorPackage = await RabbitMqPublisher.EstablishConnectionOnQueue(FantasyUserConstants.CREATE_USER_NOTIFICAITON_QUEUE_NAME);
+            await RabbitMqPublisher.PublishMessage(rabbitMqProcessorPackage.Channel, FantasyUserConstants.CREATE_USER_NOTIFICAITON_QUEUE_NAME, fantasyUser, CancellationToken);
 
-            //update the messages
-            return (CommandResponse)Success("Successful", request.Id);
+            return (CommandResponse)Success($"{request.ToString()} successfully created in the database!", fantasyUser.Id);
         }
     }
 }

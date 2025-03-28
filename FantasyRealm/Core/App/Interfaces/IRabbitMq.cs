@@ -21,6 +21,6 @@ namespace Core.App.Interfaces
 
         public Task PublishMessage<T>(IChannel channel, string queue, T message, CancellationToken cancellationToken);
 
-        public Task<RabbitMqProcessorPackage> EstablishConnectionOnQueue(RabbitMqConfiguration rabbitMqConfiguration, QueueConfiguration queueConfiguration, string queueName);
+        public Task<RabbitMqDataPackage> EstablishConnectionOnQueue(RabbitMqConfiguration rabbitMqConfiguration, QueueConfiguration queueConfiguration, string queueName);
     }
 }

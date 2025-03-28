@@ -128,7 +128,7 @@ namespace Core.App.Managers
             }
         }
 
-        public async Task<RabbitMqProcessorPackage> EstablishConnectionOnQueue(RabbitMqConfiguration rabbitMqConfiguration, QueueConfiguration queueConfiguration, string queueName)
+        public async Task<RabbitMqDataPackage> EstablishConnectionOnQueue(RabbitMqConfiguration rabbitMqConfiguration, QueueConfiguration queueConfiguration, string queueName)
         {
             try
             {
@@ -140,7 +140,7 @@ namespace Core.App.Managers
 
                 QueueDeclareOk queueDeclareOk = await GetQueueIfExists(connection, queueName) ?? await CreateQueue(channel, queueConfiguration);
 
-                return new RabbitMqProcessorPackage
+                return new RabbitMqDataPackage
                 {
                     QueueDeclareOk = queueDeclareOk,
                     Connection = connection,
