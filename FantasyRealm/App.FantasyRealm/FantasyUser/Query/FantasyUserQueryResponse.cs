@@ -17,6 +17,6 @@ namespace App.FantasyRealm.FantasyUser.Query
 
         public DateTime DateOfBirth { get; set; }
 
-        public string ProfilePicture { get; set; }
+        public string ProfilePicturePath { get; set; }
     }
 }

@@ -24,8 +24,7 @@ namespace App.FantasyRealm.FantasyUser.Update
 
         public DateTime DateOfBirth { get; set; }
 
-        //path
-        public string profilePicture { get; set; }
+        public string ProfilePicturePath { get; set; }
 
         public static Domain.FantasyUser Copy(FantasyUserUpdateRequest fantasyUserUpdateRequest, Domain.FantasyUser fantasyUser)
         {
@@ -35,7 +34,7 @@ namespace App.FantasyRealm.FantasyUser.Update
             fantasyUser.Email = fantasyUserUpdateRequest.Email.Trim();
             fantasyUser.Password = fantasyUserUpdateRequest.Password.Trim();
             fantasyUser.DateOfBirth = fantasyUserUpdateRequest.DateOfBirth;
-            fantasyUser.profilePicture = fantasyUserUpdateRequest.profilePicture.Trim();
+            fantasyUser.ProfilePicturePath = fantasyUserUpdateRequest.ProfilePicturePath.Trim();
             fantasyUser.Id = fantasyUserUpdateRequest.Id;
 
             return fantasyUser;
@@ -43,7 +42,7 @@ namespace App.FantasyRealm.FantasyUser.Update
 
         public override string ToString()
         {
-            return $"Id: {Id}, Name: {Name}, Surname: {Surname}, Username: {Username}, Email: {Email}, Password: {Password}, DateOfBirth: {DateOfBirth}, profilePicture: {profilePicture},";
+            return $"Id: {Id}, Name: {Name}, Surname: {Surname}, Username: {Username}, Email: {Email}, Password: {Password}, DateOfBirth: {DateOfBirth}, profilePicture: {ProfilePicturePath},";
         }
     }
 }

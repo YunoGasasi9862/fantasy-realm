@@ -21,6 +21,8 @@ namespace App.FantasyRealm.Domain
 
         public DateTime DateOfBirth { get; set; }
 
-        public string profilePicture { get; set; }
+        public bool IsActive { get; set; }
+
+        public string ProfilePicturePath { get; set; }
     }
 }

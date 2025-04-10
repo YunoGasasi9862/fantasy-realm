@@ -21,7 +21,7 @@ namespace App.FantasyRealm.FantasyUser.Query
                 Email = fu.Email,
                 Password = fu.Password,
                 DateOfBirth = fu.DateOfBirth,
-                ProfilePicture = fu.profilePicture,
+                ProfilePicturePath = fu.ProfilePicturePath,
             }));
         }
     }

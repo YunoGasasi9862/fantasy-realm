@@ -31,6 +31,6 @@ namespace App.FantasyRealm.FantasyUser.Create
 
         //Path
         [DataType(DataType.ImageUrl)]
-        public string profilePicture { get; set; }
+        public string ProfilePicturePath { get; set; }
     }
 }

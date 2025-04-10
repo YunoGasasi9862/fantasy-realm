@@ -36,7 +36,7 @@ namespace App.FantasyRealm.FantasyUser.Create
             Domain.FantasyUser fantasyUser = new Domain.FantasyUser()
             {
                 Password = request.Password.Trim(), //use encryption if possible
-                profilePicture = request.profilePicture,
+                ProfilePicturePath = request.ProfilePicturePath,
                 Surname = request.Surname.Trim(),
                 Name = request.Name.Trim(),
                 Username = request.Username.Trim(),

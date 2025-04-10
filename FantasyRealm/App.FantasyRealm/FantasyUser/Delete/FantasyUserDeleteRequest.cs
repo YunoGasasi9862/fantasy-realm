@@ -24,7 +24,6 @@ namespace App.FantasyRealm.FantasyUser.Delete
 
         public DateTime DateOfBirth { get; set; }
 
-        //path
-        public string profilePicture { get; set; }
+        public string ProfilePicturePath { get; set; }
     }
 }
