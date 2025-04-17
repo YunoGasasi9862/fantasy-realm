@@ -7,8 +7,6 @@ namespace App.FantasyRealm.Domain
     {
         public DbSet<PersonalityType> PersonalityTypes { get; set; }
 
-        public DbSet<FantasyUser> FantasyUsers { get; set; }    
-
         public DbSet<FantasyUserPersonalityAssociation> FantsayUserPersonalityAssociations { get; set; }
 
         public DbSet<Question> Questions { get; set; }

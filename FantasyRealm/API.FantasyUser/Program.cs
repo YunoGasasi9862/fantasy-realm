@@ -1,5 +1,7 @@
-using App.FantasyRealm.Domain;
-using App.FantasyRealm.Features;
+
+
+using App.FantasyUser.Domain;
+using App.FantasyUser.Features;
 using Core.App.Domain;
 using Core.App.Interfaces;
 using Core.App.Managers;
@@ -9,17 +11,18 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddServiceDefaults();
-
+builder.Services.Configure<AccessTokenSettings>(builder.Configuration.GetSection("AccessTokenSettings"));
 builder.Services.Configure<RabbitMqConfiguration>(builder.Configuration.GetSection("RabbitMqConfiguration"));
 
-var connectionString = builder.Configuration.GetConnectionString("FantasyRealmDBConnectionString");
-builder.Services.AddDbContext<FantasyRealmDBContext>(options => options.UseSqlServer(connectionString));
-builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(FantasyRealmDBHandler).Assembly));
+var connectionString = builder.Configuration.GetConnectionString("FantasyUserDBConnectionString");
+builder.Services.AddDbContext<FantasyUserDbContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(FantasyUserDbHandler).Assembly));
 builder.Services.AddSingleton<IRabbitMq, RabbitMqManager>();
 builder.Services.AddScoped<IRabbitMqProcessor, RabbitMqProcessor>();
 builder.Services.AddScoped<IRabbitMqPublisher, RabbitMqPublisher>();
 builder.Services.AddScoped<IAuthenticator, TwoFactorAuthenticator>();
+
+builder.AddServiceDefaults();
 
 // Add services to the container.
 

@@ -1,9 +1,4 @@
 ﻿using Core.App.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.FantasyRealm.Domain
 {
@@ -14,7 +9,8 @@ namespace App.FantasyRealm.Domain
 
         public int PersonalityTypeId { get; set;}
 
-        public virtual FantasyUser FantasyUser { get; set; }
+        //fix this
+       // public virtual FantasyUser FantasyUser { get; set; }
 
         public virtual PersonalityType PersonalityType { get; set;}
     }

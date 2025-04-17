@@ -1,5 +1,5 @@
 ﻿using App.FantasyRealm.Domain;
-using App.FantasyRealm.Interfaces;
+using Core.Interfaces;
 using Core.App.Features;
 using System.Globalization;
 

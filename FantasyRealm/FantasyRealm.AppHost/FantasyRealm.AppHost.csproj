@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\API.FantasyRealm\API.FantasyRealm.csproj" />
+    <ProjectReference Include="..\API.FantasyUser\API.FantasyUser.csproj" />
     <ProjectReference Include="..\App.FantasyRealm\App.FantasyRealm.csproj" />
   </ItemGroup>
 
