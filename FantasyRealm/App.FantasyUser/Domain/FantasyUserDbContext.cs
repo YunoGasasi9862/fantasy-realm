@@ -6,11 +6,10 @@ namespace App.FantasyUser.Domain
     {
         public DbSet<FantasyUser> FantasyUsers { get; set; }
 
-        public DbSet<FantasyRefreshToken> RefreshTokens { get; set; }
+        public DbSet<FantasyUserRefreshToken> RefreshTokens { get; set; }
 
         public FantasyUserDbContext(DbContextOptions<FantasyUserDbContext> dbContextOptions) : base(dbContextOptions)
         { 
-        
         
         }
     }

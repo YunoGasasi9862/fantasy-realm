@@ -17,7 +17,7 @@ namespace App.FantasyUser.FantasyUser.Create
         private IRabbitMqPublisher RabbitMqPublisher { get; set; }
         private CancellationToken CancellationToken { get; set; }
         private CancellationTokenSource CancellationTokenSource { get; set; }
-        public FantasyUserCreateHandler(FantasyUserDbContext fantasyUserDbContext, IRabbitMqPublisher rabbitMqPublisher) : base(fantasyUserDbContext)
+        public FantasyUserCreateHandler(FantasyUserDbContext fantasyUserDbContext, IRabbitMqPublisher rabbitMqPublisher, AccessTokenSettings accessTokenSettings) : base(fantasyUserDbContext, accessTokenSettings)
         {
             RabbitMqPublisher = rabbitMqPublisher;
 
@@ -28,7 +28,7 @@ namespace App.FantasyUser.FantasyUser.Create
 
         public async Task<CommandResponse> Handle(FantasyUserCreateRequest request, CancellationToken cancellationToken)
         {
-            if (await fantasyUserDbContext.FantasyUsers.AnyAsync(fu => fu.Email == request.Email.Trim(), cancellationToken))
+            if (await FantasyUserDbContext.FantasyUsers.AnyAsync(fu => fu.Email == request.Email.Trim(), cancellationToken))
             {
                 return (CommandResponse)Error($"A user already Exists with the email {request.Email}");
             }
@@ -45,9 +45,9 @@ namespace App.FantasyUser.FantasyUser.Create
 
             };
 
-            fantasyUserDbContext.FantasyUsers.Add(fantasyUser);
+            FantasyUserDbContext.FantasyUsers.Add(fantasyUser);
 
-            await fantasyUserDbContext.SaveChangesAsync(cancellationToken);
+            await FantasyUserDbContext.SaveChangesAsync(cancellationToken);
 
             //queuing the object for later use by the consumer/processor
             RabbitMqDataPackage rabbitMqProcessorPackage = await RabbitMqPublisher.EstablishConnectionOnQueue(FantasyUserConstants.CREATE_USER_NOTIFICAITON_QUEUE_NAME);

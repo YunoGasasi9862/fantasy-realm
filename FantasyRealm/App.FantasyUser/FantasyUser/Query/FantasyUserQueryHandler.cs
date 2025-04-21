@@ -6,13 +6,13 @@ namespace App.FantasyUser.FantasyUser.Query
 {
     public class FantasyUserQueryHandler : FantasyUserDbHandler, IRequestHandler<FantasyUserQueryRequest, IQueryable<FantasyUserQueryResponse>>
     {
-        public FantasyUserQueryHandler(FantasyUserDbContext fantasyUserDbContext) : base(fantasyUserDbContext)
+        public FantasyUserQueryHandler(FantasyUserDbContext fantasyUserDbContext, AccessTokenSettings accessTokenSettings) : base(fantasyUserDbContext, accessTokenSettings)
         {
         }
 
         Task<IQueryable<FantasyUserQueryResponse>> IRequestHandler<FantasyUserQueryRequest, IQueryable<FantasyUserQueryResponse>>.Handle(FantasyUserQueryRequest request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(fantasyUserDbContext.FantasyUsers.OrderBy(fu => fu.Name).Select(fu => new FantasyUserQueryResponse()
+            return Task.FromResult(FantasyUserDbContext.FantasyUsers.OrderBy(fu => fu.Name).Select(fu => new FantasyUserQueryResponse()
             {
                 Id = fu.Id,
                 Name = fu.Name,
