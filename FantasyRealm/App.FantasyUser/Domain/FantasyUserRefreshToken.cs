@@ -1,17 +1,21 @@
 ﻿
 
 using Core.App.Domain;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace App.FantasyUser.Domain
 {
-    //remove this entity later, and configure in the DB context class to use UserId as primary key
     public class FantasyUserRefreshToken : Entity
     {
-        //make 1:1
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int UserId { get; set; }
 
         public string RefreshToken { get; set; }
 
         public int RefreshTokenExpirationTime { get; set; }
+
+        public virtual FantasyUser FantasyUser { get; set; }
     }
 }

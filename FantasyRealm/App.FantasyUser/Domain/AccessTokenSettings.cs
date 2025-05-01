@@ -20,5 +20,7 @@ namespace App.FantasyUser.Domain
         public SecurityKey SigningKey => new SymmetricSecurityKey(Encoding.UTF8.GetBytes(EncryptedSecurityKey));
 
         public int RefreshTokenExpirationTimeInDays { get; set; }
+
+        public int RefreshTokenLengthInBytes { get; set; }
     }
 }

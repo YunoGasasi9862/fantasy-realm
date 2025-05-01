@@ -24,7 +24,7 @@ namespace App.FantasyUser.Authorization.FantasyRealmAccessToken.Create
                 return new CommandResponse(false, $"User not found with the username {request.UserName}");
             }
 
-            FantasyUserRefreshToken fantasyRefreshToken = await GenerateRefreshToken();
+            FantasyUserRefreshToken fantasyRefreshToken = await GenerateRefreshToken(fantasyUser);
 
             return new CommandResponse(true, $"Succesful!!");
         }
