@@ -14,7 +14,6 @@ namespace Core.App.Features
 
         public string? Message { get; }
 
-
         public CommandResponse() { }
 
         public CommandResponse(bool isSuccessful, string? message, int id = 0) : base(id)

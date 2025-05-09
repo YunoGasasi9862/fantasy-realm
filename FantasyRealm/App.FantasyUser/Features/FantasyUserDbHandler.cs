@@ -1,6 +1,7 @@
 ﻿using App.FantasyUser.Domain;
 using Core.App.Features;
 using Core.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
@@ -42,7 +43,7 @@ namespace App.FantasyUser.Features
 
         }
 
-        protected Task<FantasyUserRefreshToken> GenerateRefreshToken(Domain.FantasyUser fantasyUser)
+        protected async Task<FantasyUserRefreshToken> CreateFantasyUserRefreshToken(Domain.FantasyUser fantasyUser)
         {
             byte[] bytes = new byte[FantasyTokenSettings.RefreshTokenLengthInBytes];
 
@@ -51,17 +52,43 @@ namespace App.FantasyUser.Features
                 randomNumberGenerator.GetBytes(bytes);
             }
 
-            return Task.FromResult(new FantasyUserRefreshToken()
+            //TODO improvements/check if you can offload it to the handler/via event so it gets created else where and not here
+
+            FantasyUserRefreshToken fantasyUserRefreshToken = new FantasyUserRefreshToken()
             {
                 UserId = fantasyUser.Id,
-                RefreshToken =  Convert.ToBase64String(bytes),
+                RefreshToken = Convert.ToBase64String(bytes),
                 RefreshTokenExpirationTime = FantasyTokenSettings.RefreshTokenExpirationTimeInDays
-            });
+            };
+
+            FantasyUserDbContext.Add(fantasyUserRefreshToken);
+
+            await FantasyUserDbContext.SaveChangesAsync();
+
+            return fantasyUserRefreshToken; 
         } 
 
-        protected virtual ClaimsPrincipal GetClaimsPrincipal(string accessToken)
+        protected virtual ClaimsPrincipal? GetClaimsPrincipal(string accessToken)
         {
-            return null;
+            //removes the bearer part if it exists
+            accessToken = accessToken.StartsWith(JwtBearerDefaults.AuthenticationScheme) ? 
+                accessToken.Remove(0, JwtBearerDefaults.AuthenticationScheme.Length + 1) : accessToken;
+
+            TokenValidationParameters tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateLifetime = false,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = FantasyTokenSettings.SigningKey
+            };
+
+            JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+            SecurityToken? securityToken = null;
+
+            ClaimsPrincipal principal = jwtSecurityTokenHandler.ValidateToken(accessToken, tokenValidationParameters, out securityToken);
+
+            return securityToken == null ? null : principal;
         }
     }
 }

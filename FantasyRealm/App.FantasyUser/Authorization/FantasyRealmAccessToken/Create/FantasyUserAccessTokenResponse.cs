@@ -1,16 +1,13 @@
-﻿using Core.App.Features;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using App.FantasyUser.Authorization.Common;
+
 
 namespace App.FantasyUser.Authorization.FantasyRealmAccessToken.Create
 {
-    public class FantasyUserAccessTokenResponse: CommandResponse
+    public class FantasyUserAccessTokenResponse: TokenResponse
     {
-        public string Token { get; set; }
-
-        public string RefreshToken { get; set; }
+        public FantasyUserAccessTokenResponse(bool isSuccessful, string? message, int id = 0) : base(isSuccessful, message, id)
+        {
+           
+        }
     }
 }
