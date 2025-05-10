@@ -43,31 +43,6 @@ namespace App.FantasyUser.Features
 
         }
 
-        protected async Task<FantasyUserRefreshToken> CreateFantasyUserRefreshToken(Domain.FantasyUser fantasyUser)
-        {
-            byte[] bytes = new byte[FantasyTokenSettings.RefreshTokenLengthInBytes];
-
-            using(RandomNumberGenerator randomNumberGenerator = RandomNumberGenerator.Create())
-            {
-                randomNumberGenerator.GetBytes(bytes);
-            }
-
-            //TODO improvements/check if you can offload it to the handler/via event so it gets created else where and not here
-
-            FantasyUserRefreshToken fantasyUserRefreshToken = new FantasyUserRefreshToken()
-            {
-                UserId = fantasyUser.Id,
-                RefreshToken = Convert.ToBase64String(bytes),
-                RefreshTokenExpirationTime = FantasyTokenSettings.RefreshTokenExpirationTimeInDays
-            };
-
-            FantasyUserDbContext.Add(fantasyUserRefreshToken);
-
-            await FantasyUserDbContext.SaveChangesAsync();
-
-            return fantasyUserRefreshToken; 
-        } 
-
         protected virtual ClaimsPrincipal? GetClaimsPrincipal(string accessToken)
         {
             //removes the bearer part if it exists

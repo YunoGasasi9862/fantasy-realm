@@ -14,7 +14,7 @@ namespace App.FantasyUser.Domain
 
         public string RefreshToken { get; set; }
 
-        public int RefreshTokenExpirationTime { get; set; }
+        public DateTime RefreshTokenExpirationTime { get; set; }
 
         public virtual FantasyUser FantasyUser { get; set; }
     }

@@ -1,23 +1,87 @@
-﻿using App.FantasyUser.Domain;
+﻿using App.FantasyUser.Authorization.Common;
+using App.FantasyUser.Domain;
 using App.FantasyUser.Features;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using System.Security.Cryptography;
 
 namespace App.FantasyUser.Authorization.FantasyRealmRefreshToken.Create
 {
-    public class FantasyUserRefreshTokenHandler : FantasyUserDbHandler, IRequestHandler<FantasyUserRefreshTokenRequest, FantasyUserRefreshTokenResponse>
+    public class FantasyUserRefreshTokenHandler : FantasyUserDbHandler, IRequestHandler<FantasyUserRefreshTokenRequest, FantasyUserRefreshTokenResponse>, IRequestHandler<FantasyUserRefreshTokenNotificationRequest, FantasyUserRefreshTokenNotificationResponse>
     {
-        public FantasyUserRefreshTokenHandler(FantasyUserDbContext fantasyUserDbContext, AccessTokenSettings accessTokenSettings) : base(fantasyUserDbContext, accessTokenSettings)
+        private IMediator Mediator { get; set; }
+        public FantasyUserRefreshTokenHandler(FantasyUserDbContext fantasyUserDbContext, AccessTokenSettings accessTokenSettings, IMediator mediator) : base(fantasyUserDbContext, accessTokenSettings)
         {
+            Mediator = mediator;
         }
 
-        public Task<FantasyUserRefreshTokenResponse> Handle(FantasyUserRefreshTokenRequest request, CancellationToken cancellationToken)
+        public async Task<FantasyUserRefreshTokenNotificationResponse> Handle(FantasyUserRefreshTokenNotificationRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            FantasyUserRefreshTokenNotificationResponse fantasyUserRefreshToken = await CreateFantasyUserRefreshToken(request.FantasyUser);
+
+            return fantasyUserRefreshToken;
+        }
+
+        public async Task<FantasyUserRefreshTokenResponse> Handle(FantasyUserRefreshTokenRequest request, CancellationToken cancellationToken)
+        {
+            ClaimsPrincipal? principal =  GetClaimsPrincipal(request.AccessToken);
+
+            int userId = Convert.ToInt32(principal.Claims.SingleOrDefault(claim => claim.Type == "Id").Value);
+
+            Domain.FantasyUser? fantasyUser = FantasyUserDbContext.FantasyUsers.Include(user => user.Role)
+                .Include(token => token.FantasyUserRefreshToken)
+                .SingleOrDefault(user => user.Id == userId && user.FantasyUserRefreshToken.RefreshToken == request.RefreshToken &&
+                                  user.FantasyUserRefreshToken.RefreshTokenExpirationTime >= DateTime.Now);
+
+            if (fantasyUser == null)
+            {
+                return new FantasyUserRefreshTokenResponse(false, "User Not Found or the refresh token has expired!");
+            }
+
+            FantasyUserRefreshTokenNotificationResponse refreshToken = await CreateFantasyUserRefreshToken(fantasyUser);
+
+            List<Claim> claims = GetClaims(fantasyUser);
+            string accessToken = CreateAccessToken(claims, DateTime.Now.AddMinutes(FantasyTokenSettings.ExpirationInMinutes));
+
+            return new FantasyUserRefreshTokenResponse(true, $"Successfully generated the refresh token for the user: {fantasyUser.Name}", fantasyUser.Id)
+            {
+                AccessToken = accessToken,
+
+                RefreshToken = $"{JwtBearerDefaults.AuthenticationScheme} {refreshToken.RefreshToken}"
+            };
+        }
+
+        protected async Task<FantasyUserRefreshTokenNotificationResponse> CreateFantasyUserRefreshToken(Domain.FantasyUser? fantasyUser)
+        {
+            if (fantasyUser == null)
+            {
+                throw new ApplicationException($"Provided user is null!");
+            }
+
+            byte[] bytes = new byte[FantasyTokenSettings.RefreshTokenLengthInBytes];
+
+            using (RandomNumberGenerator randomNumberGenerator = RandomNumberGenerator.Create())
+            {
+                randomNumberGenerator.GetBytes(bytes);
+            }
+
+            FantasyUserRefreshToken fantasyUserRefreshToken = new FantasyUserRefreshToken()
+            {
+                UserId = fantasyUser.Id,
+                RefreshToken = Convert.ToBase64String(bytes),
+                RefreshTokenExpirationTime = DateTime.Now.AddDays(FantasyTokenSettings.RefreshTokenExpirationTimeInDays)
+            };
+
+            FantasyUserDbContext.Add(fantasyUserRefreshToken);
+
+            await FantasyUserDbContext.SaveChangesAsync();
+
+            return new FantasyUserRefreshTokenNotificationResponse()
+            { 
+                RefreshToken = fantasyUserRefreshToken.RefreshToken,
+            };
         }
     }
 }
