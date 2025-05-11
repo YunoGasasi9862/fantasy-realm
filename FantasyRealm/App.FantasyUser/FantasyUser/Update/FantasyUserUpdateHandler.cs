@@ -3,13 +3,14 @@ using App.FantasyUser.Features;
 using Core.App.Features;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 
 namespace App.FantasyUser.FantasyUser.Update
 {
     public class FantasyUserUpdateHandler : FantasyUserDbHandler, IRequestHandler<FantasyUserUpdateRequest, CommandResponse>
     {
-        public FantasyUserUpdateHandler(FantasyUserDbContext fantasyUserDbContext, AccessTokenSettings accessTokenSettings) : base(fantasyUserDbContext, accessTokenSettings)
+        public FantasyUserUpdateHandler(FantasyUserDbContext fantasyUserDbContext, IOptions<AccessTokenSettings> accessTokenSettings) : base(fantasyUserDbContext, accessTokenSettings)
         {
         }
 

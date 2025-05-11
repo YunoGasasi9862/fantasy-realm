@@ -25,10 +25,16 @@ namespace App.FantasyUser.Domain
 
         public string ProfilePicturePath { get; set; }
 
-        [JsonIgnore] 
+        public int RoleId { get; set; }
+
         public virtual FantasyUserRole Role { get; set; }
 
-        [JsonIgnore]
         public virtual FantasyUserRefreshToken FantasyUserRefreshToken { get; set; }
+
+        public override string ToString()
+        {
+            return $"FantasyUser: Id = {Id}, Name = {Name} {Surname}, Username = {Username}, Email = {Email}, " +
+                   $"DOB = {DateOfBirth:yyyy-MM-dd}, IsActive = {IsActive}, Role = {Role.ToString()}";
+        }
     }
 }

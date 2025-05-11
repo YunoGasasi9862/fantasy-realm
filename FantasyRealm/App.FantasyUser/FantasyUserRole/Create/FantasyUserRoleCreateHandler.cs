@@ -1,11 +1,16 @@
 ﻿
 
 using App.FantasyUser.Domain;
+using App.FantasyUser.FantasyUser.Contants;
 using App.FantasyUser.FantasyUser.Create;
 using App.FantasyUser.Features;
+using Core.App.Domain;
 using Core.App.Features;
+using Core.App.Publishers;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using System.Diagnostics;
 
 namespace App.FantasyUser.FantasyUserRole.Create
 {
@@ -13,7 +18,7 @@ namespace App.FantasyUser.FantasyUserRole.Create
     {
         private CancellationToken CancellationToken { get; set; }
         private CancellationTokenSource CancellationTokenSource { get; set; }
-        public FantasyUserRoleCreateHandler(FantasyUserDbContext fantasyUserDbContext, AccessTokenSettings accessTokenSettings) : base(fantasyUserDbContext, accessTokenSettings)
+        public FantasyUserRoleCreateHandler(FantasyUserDbContext fantasyUserDbContext, IOptions<AccessTokenSettings> accessTokenSettings) : base(fantasyUserDbContext, accessTokenSettings)
         {
             CancellationTokenSource = new CancellationTokenSource();
 
@@ -22,7 +27,21 @@ namespace App.FantasyUser.FantasyUserRole.Create
 
         public async Task<CommandResponse> Handle(FantasyUserRoleCreateRequest request, CancellationToken cancellationToken)
         {
-            return (CommandResponse)Success($"{request.ToString()} successfully created in the database!", request.Id);
+            if (await FantasyUserDbContext.FantasyUserRoles.AnyAsync(role => role.Name == request.Name.Trim()))
+            {
+                return (CommandResponse)Error($"Role {request.Name} already exists in the database - won't create a new one!");
+            }
+
+            Domain.FantasyUserRole fantasyUserRole = new Domain.FantasyUserRole()
+            {
+                Name = request.Name
+            };
+
+            FantasyUserDbContext.FantasyUserRoles.Add(fantasyUserRole);
+
+            await FantasyUserDbContext.SaveChangesAsync(cancellationToken);
+
+            return (CommandResponse)Success($"{request.Name} successfully created in the database!", fantasyUserRole.Id);
         }
     }
 }

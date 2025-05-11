@@ -22,5 +22,14 @@ namespace App.FantasyUser.Domain
         public int RefreshTokenExpirationTimeInDays { get; set; }
 
         public int RefreshTokenLengthInBytes { get; set; }
+
+        public override string ToString()
+        {
+            return $"Issuer: {Issuer}, Audience: {Audience}, " +
+                   $"ExpirationInMinutes: {ExpirationInMinutes}, " +
+                   $"EncryptedSecurityKey: {(string.IsNullOrEmpty(EncryptedSecurityKey) ? "null or empty" : "***")}, " +
+                   $"RefreshTokenExpirationTimeInDays: {RefreshTokenExpirationTimeInDays}, " +
+                   $"RefreshTokenLengthInBytes: {RefreshTokenLengthInBytes}";
+        }
     }
 }

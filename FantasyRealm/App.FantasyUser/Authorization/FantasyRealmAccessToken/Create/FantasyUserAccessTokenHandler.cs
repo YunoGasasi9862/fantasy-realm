@@ -5,6 +5,7 @@ using App.FantasyUser.Features;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System.Security.Claims;
 
 
@@ -14,14 +15,17 @@ namespace App.FantasyUser.Authorization.FantasyRealmAccessToken.Create
     {
         private IMediator Mediator { get; set; }
 
-        public FantasyUserAccessTokenHandler(FantasyUserDbContext fantasyUserDbContext, AccessTokenSettings accessTokenSettings, IMediator mediator) : base(fantasyUserDbContext, accessTokenSettings)
+        public FantasyUserAccessTokenHandler(FantasyUserDbContext fantasyUserDbContext, IOptions<AccessTokenSettings> accessTokenSettings, IMediator mediator) : base(fantasyUserDbContext, accessTokenSettings)
         {
             Mediator = mediator;
         }
 
         public async Task<FantasyUserAccessTokenResponse> Handle(FantasyUserAccessTokenRequest request, CancellationToken cancellationToken)
         {
-            Domain.FantasyUser? fantasyUser = await FantasyUserDbContext.FantasyUsers.SingleOrDefaultAsync(user => user.Username == request.UserName.Trim() && user.Password == request.Password, cancellationToken);
+            Domain.FantasyUser? fantasyUser = await FantasyUserDbContext.FantasyUsers
+                .Include(user => user.Role)
+                .Include(user => user.FantasyUserRefreshToken)
+                .SingleOrDefaultAsync(user => user.Username == request.UserName.Trim() && user.Password == request.Password, cancellationToken);
 
             if (fantasyUser == null)
             {

@@ -8,6 +8,7 @@ using Core.App.Features;
 using Core.App.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System.Diagnostics;
 
 namespace App.FantasyUser.FantasyUser.Create
@@ -18,7 +19,7 @@ namespace App.FantasyUser.FantasyUser.Create
         private IRabbitMqPublisher RabbitMqPublisher { get; set; }
         private CancellationToken CancellationToken { get; set; }
         private CancellationTokenSource CancellationTokenSource { get; set; }
-        public FantasyUserCreateHandler(FantasyUserDbContext fantasyUserDbContext, IRabbitMqPublisher rabbitMqPublisher, AccessTokenSettings accessTokenSettings) : base(fantasyUserDbContext, accessTokenSettings)
+        public FantasyUserCreateHandler(FantasyUserDbContext fantasyUserDbContext, IRabbitMqPublisher rabbitMqPublisher, IOptions<AccessTokenSettings> accessTokenSettings) : base(fantasyUserDbContext, accessTokenSettings)
         {
             RabbitMqPublisher = rabbitMqPublisher;
 
@@ -34,6 +35,16 @@ namespace App.FantasyUser.FantasyUser.Create
                 return (CommandResponse)Error($"A user already Exists with the email {request.Email}");
             }
 
+            Domain.FantasyUserRole? fantasyRole = FantasyUserDbContext.FantasyUserRoles.SingleOrDefault(role => role.Name == request.Role.Trim());
+
+            Debug.WriteLine(fantasyRole?.ToString());
+
+            if (fantasyRole == null)
+            {
+                return (CommandResponse)Error($"Role {request.Role} does not exist in the database!");
+            }
+
+
             Domain.FantasyUser fantasyUser = new Domain.FantasyUser()
             {
                 Password = request.Password.Trim(), //use encryption if possible
@@ -42,10 +53,7 @@ namespace App.FantasyUser.FantasyUser.Create
                 Name = request.Name.Trim(),
                 Username = request.Username.Trim(),
                 DateOfBirth = DateTime.Parse(request.DateOfBirth.ToString()),
-                Role = new Domain.FantasyUserRole
-                {
-                    Name = request.Role
-                },
+                RoleId = fantasyRole.Id,
                 Email = request.Email.Trim(),
 
             };
@@ -60,7 +68,7 @@ namespace App.FantasyUser.FantasyUser.Create
             //self referencing issue - debug later (fantasy user has roles, and then roles has users - issue in serialization/deserialization)
             await RabbitMqPublisher.PublishMessage(rabbitMqProcessorPackage.Channel, FantasyUserConstants.CREATE_USER_NOTIFICAITON_QUEUE_NAME, request, CancellationToken);
 
-            return (CommandResponse)Success($"{request.ToString()} successfully created in the database!", fantasyUser.Id);
+            return (CommandResponse)Success($"{fantasyUser.Name} {request.Surname} successfully created in the database!", fantasyUser.Id);
         }
     }
 }

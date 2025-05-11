@@ -3,13 +3,14 @@ using App.FantasyUser.Domain;
 using App.FantasyUser.Features;
 using Core.App.Features;
 using MediatR;
+using Microsoft.Extensions.Options;
 
 
 namespace App.FantasyUser.FantasyUserRole.Delete
 {
     public class FantasyUserRoleDeleteRequestHandler : FantasyUserDbHandler, IRequestHandler<FantasyUserRoleDeleteRequest, CommandResponse>
     {
-        public FantasyUserRoleDeleteRequestHandler(FantasyUserDbContext fantasyUserDbContext, AccessTokenSettings accessTokenSettings) : base(fantasyUserDbContext, accessTokenSettings)
+        public FantasyUserRoleDeleteRequestHandler(FantasyUserDbContext fantasyUserDbContext, IOptions<AccessTokenSettings> accessTokenSettings) : base(fantasyUserDbContext, accessTokenSettings)
         {
 
         }

@@ -1,12 +1,13 @@
 ﻿using App.FantasyUser.Domain;
 using App.FantasyUser.Features;
 using MediatR;
+using Microsoft.Extensions.Options;
 
 namespace App.FantasyUser.FantasyUser.Query
 {
     public class FantasyUserQueryHandler : FantasyUserDbHandler, IRequestHandler<FantasyUserQueryRequest, IQueryable<FantasyUserQueryResponse>>
     {
-        public FantasyUserQueryHandler(FantasyUserDbContext fantasyUserDbContext, AccessTokenSettings accessTokenSettings) : base(fantasyUserDbContext, accessTokenSettings)
+        public FantasyUserQueryHandler(FantasyUserDbContext fantasyUserDbContext, IOptions<AccessTokenSettings> accessTokenSettings) : base(fantasyUserDbContext, accessTokenSettings)
         {
         }
 

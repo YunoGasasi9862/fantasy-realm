@@ -17,5 +17,12 @@ namespace App.FantasyUser.Domain
         public DateTime RefreshTokenExpirationTime { get; set; }
 
         public virtual FantasyUser FantasyUser { get; set; }
+
+        public override string ToString()
+        {
+            return $"UserId: {UserId}, RefreshToken: {RefreshToken}, " +
+                   $"Expires: {RefreshTokenExpirationTime}, " +
+                   $"FantasyUser: {(FantasyUser != null ? FantasyUser.ToString() : "null")}";
+        }
     }
 }

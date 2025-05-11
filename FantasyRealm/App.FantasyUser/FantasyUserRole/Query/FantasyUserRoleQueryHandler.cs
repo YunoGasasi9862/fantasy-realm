@@ -1,12 +1,13 @@
 ﻿using App.FantasyUser.Domain;
 using App.FantasyUser.Features;
 using MediatR;
+using Microsoft.Extensions.Options;
 
 namespace App.FantasyUser.FantasyUserRole.Query
 {
     public class FantasyUserRoleQueryHandler : FantasyUserDbHandler, IRequestHandler<FantasyUserRoleQueryRequest, IQueryable<FantasyUserRoleQueryResponse>>
     {
-        public FantasyUserRoleQueryHandler(FantasyUserDbContext fantasyUserDbContext, AccessTokenSettings accessTokenSettings) : base(fantasyUserDbContext, accessTokenSettings)
+        public FantasyUserRoleQueryHandler(FantasyUserDbContext fantasyUserDbContext, IOptions<AccessTokenSettings> accessTokenSettings) : base(fantasyUserDbContext, accessTokenSettings)
         {
         }
 

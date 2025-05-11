@@ -2,7 +2,9 @@
 using Core.App.Features;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using System.Diagnostics;
 using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -16,11 +18,13 @@ namespace App.FantasyUser.Features
 
         protected AccessTokenSettings FantasyTokenSettings { get; set; }
 
-        public FantasyUserDbHandler(FantasyUserDbContext fantasyUserDbContext, AccessTokenSettings accessTokenSettings) : base(new CultureInfo("en-US"))
+        public FantasyUserDbHandler(FantasyUserDbContext fantasyUserDbContext, IOptions<AccessTokenSettings> accessTokenSettings) : base(new CultureInfo("en-US"))
         {
             FantasyUserDbContext = fantasyUserDbContext;
 
-            FantasyTokenSettings = accessTokenSettings;
+            FantasyTokenSettings = accessTokenSettings.Value;
+
+            Debug.WriteLine($"Original Token Settings: {FantasyTokenSettings.ToString()}");
         }
 
         protected virtual string CreateAccessToken(List<Claim> claims, DateTime accessTokenExpiration)
@@ -29,11 +33,16 @@ namespace App.FantasyUser.Features
 
             JwtSecurityToken jwtSecurityToken = new JwtSecurityToken(FantasyTokenSettings.Issuer, FantasyTokenSettings.Audience, claims, DateTime.Now, accessTokenExpiration, signingCredentials);
 
+            Debug.WriteLine($"signingCredentials: {signingCredentials}");
+
+            Debug.WriteLine($"jwtSecurityToken: {jwtSecurityToken}");
+
             return new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
         }
 
         protected virtual List<Claim> GetClaims(Domain.FantasyUser fantasyUser)
         {
+            Debug.WriteLine(fantasyUser.ToString());
             return new List<Claim>()
             {
                 new Claim(ClaimTypes.Name, fantasyUser.Name),

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.FantasyUser.Migrations
 {
     [DbContext(typeof(FantasyUserDbContext))]
-    [Migration("20250501115745_v7")]
-    partial class v7
+    [Migration("20250511125023_v9")]
+    partial class v9
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -88,8 +88,8 @@ namespace App.FantasyUser.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RefreshTokenExpirationTime")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("RefreshTokenExpirationTime")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("UserId");
 
