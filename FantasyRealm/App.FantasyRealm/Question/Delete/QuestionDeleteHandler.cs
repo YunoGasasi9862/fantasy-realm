@@ -30,7 +30,7 @@ namespace App.FantasyRealm.Question.Delete
 
             await fantasyRealmDBContext.SaveChangesAsync(cancellationToken);
 
-            return (CommandResponse)Success($"Question: {request.Verbiage} successfully removed!", request.Id);
+            return (CommandResponse)Success($"Question: {request.Id} successfully removed!", request.Id);
         }
     }
 }
