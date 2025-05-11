@@ -26,7 +26,7 @@ namespace App.FantasyRealm.QuestionChoice.Delete
 
             await fantasyRealmDBContext.SaveChangesAsync(cancellationToken);
 
-            return (CommandResponse)Success($"Question Choice: {request.Choice.ToString()} successfully removed!", request.Id);
+            return (CommandResponse)Success($"Question Choice: {request.Id} successfully removed!", request.Id);
         }
     }
 }

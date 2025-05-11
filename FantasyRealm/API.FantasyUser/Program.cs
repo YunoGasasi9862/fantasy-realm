@@ -21,6 +21,16 @@ builder.Services.AddSingleton<IRabbitMq, RabbitMqManager>();
 builder.Services.AddScoped<IRabbitMqProcessor, RabbitMqProcessor>();
 builder.Services.AddScoped<IRabbitMqPublisher, RabbitMqPublisher>();
 builder.Services.AddScoped<IAuthenticator, TwoFactorAuthenticator>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        });
+});
 
 builder.AddServiceDefaults();
 
@@ -45,6 +55,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors("AllowFrontend");
 
 app.MapControllers();
 

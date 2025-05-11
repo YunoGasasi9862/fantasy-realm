@@ -13,7 +13,7 @@ namespace App.FantasyRealm.Question.Query
 
         public Task<IQueryable<QuestionQueryResponse>> Handle(QuestionQueryRequest request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(fantasyRealmDBContext.Questions.OrderBy(q => q.Verbiage).Select(q => new QuestionQueryResponse()
+            return Task.FromResult(fantasyRealmDBContext.Questions.OrderBy(q => q.Id).Select(q => new QuestionQueryResponse()
             {
                 Id = q.Id,
                 Verbiage = q.Verbiage,
