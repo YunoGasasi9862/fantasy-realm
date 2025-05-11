@@ -1,4 +1,6 @@
-﻿using Core.App.Features;
+﻿using App.FantasyUser.Domain;
+using App.FantasyUser.FantasyUser.Update;
+using Core.App.Features;
 using MediatR;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;

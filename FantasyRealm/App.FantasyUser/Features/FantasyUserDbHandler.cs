@@ -23,8 +23,6 @@ namespace App.FantasyUser.Features
             FantasyUserDbContext = fantasyUserDbContext;
 
             FantasyTokenSettings = accessTokenSettings.Value;
-
-            Debug.WriteLine($"Original Token Settings: {FantasyTokenSettings.ToString()}");
         }
 
         protected virtual string CreateAccessToken(List<Claim> claims, DateTime accessTokenExpiration)
@@ -32,10 +30,6 @@ namespace App.FantasyUser.Features
             SigningCredentials signingCredentials = new SigningCredentials(FantasyTokenSettings.SigningKey, SecurityAlgorithms.HmacSha256Signature);
 
             JwtSecurityToken jwtSecurityToken = new JwtSecurityToken(FantasyTokenSettings.Issuer, FantasyTokenSettings.Audience, claims, DateTime.Now, accessTokenExpiration, signingCredentials);
-
-            Debug.WriteLine($"signingCredentials: {signingCredentials}");
-
-            Debug.WriteLine($"jwtSecurityToken: {jwtSecurityToken}");
 
             return new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
         }

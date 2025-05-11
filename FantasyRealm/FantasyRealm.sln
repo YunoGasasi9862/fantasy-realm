@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.FantasyUser", "App.Fant
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.FantasyUser", "API.FantasyUser\API.FantasyUser.csproj", "{68790B05-1973-43D8-B676-84E52C973659}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.Gateway", "API.Gateway\API.Gateway.csproj", "{9DFCFC58-260D-42B5-B978-BF6545B17248}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,18 @@ Global
 		{68790B05-1973-43D8-B676-84E52C973659}.Release|x64.Build.0 = Release|Any CPU
 		{68790B05-1973-43D8-B676-84E52C973659}.Release|x86.ActiveCfg = Release|Any CPU
 		{68790B05-1973-43D8-B676-84E52C973659}.Release|x86.Build.0 = Release|Any CPU
+		{9DFCFC58-260D-42B5-B978-BF6545B17248}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DFCFC58-260D-42B5-B978-BF6545B17248}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DFCFC58-260D-42B5-B978-BF6545B17248}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9DFCFC58-260D-42B5-B978-BF6545B17248}.Debug|x64.Build.0 = Debug|Any CPU
+		{9DFCFC58-260D-42B5-B978-BF6545B17248}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9DFCFC58-260D-42B5-B978-BF6545B17248}.Debug|x86.Build.0 = Debug|Any CPU
+		{9DFCFC58-260D-42B5-B978-BF6545B17248}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DFCFC58-260D-42B5-B978-BF6545B17248}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DFCFC58-260D-42B5-B978-BF6545B17248}.Release|x64.ActiveCfg = Release|Any CPU
+		{9DFCFC58-260D-42B5-B978-BF6545B17248}.Release|x64.Build.0 = Release|Any CPU
+		{9DFCFC58-260D-42B5-B978-BF6545B17248}.Release|x86.ActiveCfg = Release|Any CPU
+		{9DFCFC58-260D-42B5-B978-BF6545B17248}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
