@@ -1,5 +1,6 @@
 ﻿using Core.App.Domain;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace App.FantasyUser.Domain
 {
@@ -24,9 +25,16 @@ namespace App.FantasyUser.Domain
 
         public string ProfilePicturePath { get; set; }
 
+        public int RoleId { get; set; }
+
         public virtual FantasyUserRole Role { get; set; }
 
         public virtual FantasyUserRefreshToken FantasyUserRefreshToken { get; set; }
 
+        public override string ToString()
+        {
+            return $"FantasyUser: Id = {Id}, Name = {Name} {Surname}, Username = {Username}, Email = {Email}, " +
+                   $"DOB = {DateOfBirth:yyyy-MM-dd}, IsActive = {IsActive}, Role = {Role.ToString()}";
+        }
     }
 }

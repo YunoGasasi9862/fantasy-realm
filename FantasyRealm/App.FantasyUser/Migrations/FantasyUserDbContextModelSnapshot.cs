@@ -85,8 +85,8 @@ namespace App.FantasyUser.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RefreshTokenExpirationTime")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("RefreshTokenExpirationTime")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("UserId");
 

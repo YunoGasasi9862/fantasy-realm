@@ -3,13 +3,14 @@ using App.FantasyUser.Features;
 using Core.App.Features;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 
 namespace App.FantasyUser.FantasyUserRole.Update
 {
     public class FantasyUserRoleUpdateHandler : FantasyUserDbHandler, IRequestHandler<FantasyUserRoleUpdateRequest, CommandResponse>
     {
-        public FantasyUserRoleUpdateHandler(FantasyUserDbContext fantasyUserDbContext, AccessTokenSettings accessTokenSettings) : base(fantasyUserDbContext, accessTokenSettings)
+        public FantasyUserRoleUpdateHandler(FantasyUserDbContext fantasyUserDbContext, IOptions<AccessTokenSettings> accessTokenSettings) : base(fantasyUserDbContext, accessTokenSettings)
         {
         }
 

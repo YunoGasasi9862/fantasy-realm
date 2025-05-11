@@ -5,13 +5,14 @@ using App.FantasyUser.Features;
 using Core.App.Features;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 
 namespace App.FantasyUser.FantasyUser.Delete
 {
     public class FantasyUserDeleteHandler : FantasyUserDbHandler, IRequestHandler<FantasyUserDeleteRequest, CommandResponse>
     {
-        public FantasyUserDeleteHandler(FantasyUserDbContext fantasyUserDbContext, AccessTokenSettings accessTokenSettings) : base(fantasyUserDbContext, accessTokenSettings)
+        public FantasyUserDeleteHandler(FantasyUserDbContext fantasyUserDbContext, IOptions<AccessTokenSettings> accessTokenSettings) : base(fantasyUserDbContext, accessTokenSettings)
         {
 
         }

@@ -1,9 +1,12 @@
 ﻿using App.FantasyUser.Authorization.Common;
 using App.FantasyUser.Domain;
 using App.FantasyUser.Features;
+using Azure.Core;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using System.Diagnostics;
 using System.Security.Claims;
 using System.Security.Cryptography;
 
@@ -12,7 +15,7 @@ namespace App.FantasyUser.Authorization.FantasyRealmRefreshToken.Create
     public class FantasyUserRefreshTokenHandler : FantasyUserDbHandler, IRequestHandler<FantasyUserRefreshTokenRequest, FantasyUserRefreshTokenResponse>, IRequestHandler<FantasyUserRefreshTokenNotificationRequest, FantasyUserRefreshTokenNotificationResponse>
     {
         private IMediator Mediator { get; set; }
-        public FantasyUserRefreshTokenHandler(FantasyUserDbContext fantasyUserDbContext, AccessTokenSettings accessTokenSettings, IMediator mediator) : base(fantasyUserDbContext, accessTokenSettings)
+        public FantasyUserRefreshTokenHandler(FantasyUserDbContext fantasyUserDbContext, IOptions<AccessTokenSettings> accessTokenSettings, IMediator mediator) : base(fantasyUserDbContext, accessTokenSettings)
         {
             Mediator = mediator;
         }
@@ -26,6 +29,8 @@ namespace App.FantasyUser.Authorization.FantasyRealmRefreshToken.Create
 
         public async Task<FantasyUserRefreshTokenResponse> Handle(FantasyUserRefreshTokenRequest request, CancellationToken cancellationToken)
         {
+            Debug.WriteLine(request.ToString());
+
             ClaimsPrincipal? principal =  GetClaimsPrincipal(request.AccessToken);
 
             int userId = Convert.ToInt32(principal.Claims.SingleOrDefault(claim => claim.Type == "Id").Value);
@@ -62,10 +67,19 @@ namespace App.FantasyUser.Authorization.FantasyRealmRefreshToken.Create
 
             byte[] bytes = new byte[FantasyTokenSettings.RefreshTokenLengthInBytes];
 
+            Debug.WriteLine($"Bytes {bytes.Length} {FantasyTokenSettings.ToString()}");
+
             using (RandomNumberGenerator randomNumberGenerator = RandomNumberGenerator.Create())
             {
                 randomNumberGenerator.GetBytes(bytes);
             }
+
+            Debug.WriteLine($"Bytes {bytes.Length} {FantasyTokenSettings.RefreshTokenLengthInBytes}");
+
+            bool tokenEntryExists = FantasyUserDbContext.RefreshTokens.Include(token => token.FantasyUser)
+            .Any(token => token.UserId == fantasyUser.Id);
+
+            Debug.WriteLine($"Token: {Convert.ToBase64String(bytes)}");
 
             FantasyUserRefreshToken fantasyUserRefreshToken = new FantasyUserRefreshToken()
             {
@@ -74,9 +88,13 @@ namespace App.FantasyUser.Authorization.FantasyRealmRefreshToken.Create
                 RefreshTokenExpirationTime = DateTime.Now.AddDays(FantasyTokenSettings.RefreshTokenExpirationTimeInDays)
             };
 
-            FantasyUserDbContext.Add(fantasyUserRefreshToken);
+            //for separation of concerns, its better to have it in a separate handler (where we have an endpoint to take the update request)
+            //for now given the time constraints, its fine
+            _= tokenEntryExists ? FantasyUserDbContext.RefreshTokens.Update(fantasyUserRefreshToken) : FantasyUserDbContext.RefreshTokens.Add(fantasyUserRefreshToken);
 
             await FantasyUserDbContext.SaveChangesAsync();
+
+            Debug.WriteLine(fantasyUserRefreshToken.ToString());
 
             return new FantasyUserRefreshTokenNotificationResponse()
             { 

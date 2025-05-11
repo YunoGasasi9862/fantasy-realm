@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace App.FantasyUser.Migrations
 {
     /// <inheritdoc />
-    public partial class v7 : Migration
+    public partial class v9 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -57,7 +57,7 @@ namespace App.FantasyUser.Migrations
                 {
                     UserId = table.Column<int>(type: "int", nullable: false),
                     RefreshToken = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RefreshTokenExpirationTime = table.Column<int>(type: "int", nullable: false),
+                    RefreshTokenExpirationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

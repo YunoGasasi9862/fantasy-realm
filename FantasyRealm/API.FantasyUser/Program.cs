@@ -20,7 +20,6 @@ builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof
 builder.Services.AddSingleton<IRabbitMq, RabbitMqManager>();
 builder.Services.AddScoped<IRabbitMqProcessor, RabbitMqProcessor>();
 builder.Services.AddScoped<IRabbitMqPublisher, RabbitMqPublisher>();
-builder.Services.AddSingleton<AccessTokenSettings>();
 builder.Services.AddScoped<IAuthenticator, TwoFactorAuthenticator>();
 
 builder.AddServiceDefaults();
