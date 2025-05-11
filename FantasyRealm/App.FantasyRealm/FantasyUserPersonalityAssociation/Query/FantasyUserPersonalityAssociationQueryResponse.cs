@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.App.Features;
 
 namespace App.FantasyRealm.FantasyUserPersonalityAssociation.Query
 {
-    public class FantasyUserPersonalityAssociationQueryResponse
+    public class FantasyUserPersonalityAssociationQueryResponse : QueryResponse
     {
+        public int FantasyUserId { get; set; }
+
+        public int PersonalityTypeId { get; set; }
     }
 }

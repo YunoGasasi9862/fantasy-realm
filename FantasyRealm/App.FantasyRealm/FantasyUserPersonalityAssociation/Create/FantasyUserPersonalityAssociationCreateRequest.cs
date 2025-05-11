@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.App.Features;
+using MediatR;
 
 namespace App.FantasyRealm.FantasyUserPersonalityAssociation.Create
 {
-    public class FantasyUserPersonalityAssociationCreateRequest
+    public class FantasyUserPersonalityAssociationCreateRequest : CommandRequest, IRequest<CommandResponse>
     {
+        public FantasyUserPersonalityAssociationCreateRequest() { }
+
+        public int FantasyUserId { get; set; }
+        
+        public int PersonalityTypeId { get; set; }
     }
 }

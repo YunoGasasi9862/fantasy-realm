@@ -20,6 +20,16 @@ builder.Services.AddSingleton<IRabbitMq, RabbitMqManager>();
 builder.Services.AddScoped<IRabbitMqProcessor, RabbitMqProcessor>();
 builder.Services.AddScoped<IRabbitMqPublisher, RabbitMqPublisher>();
 builder.Services.AddScoped<IAuthenticator, TwoFactorAuthenticator>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost5173",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:5173")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
 
 // Add services to the container.
 
@@ -42,6 +52,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors("AllowLocalhost5173");
 
 app.MapControllers();
 

@@ -12,7 +12,7 @@ namespace App.FantasyRealm.PersonalityType.Query
 
         public Task<IQueryable<PersonalityTypeQueryResponse>> Handle(PersonalityTypeQueryRequest request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(fantasyRealmDBContext.PersonalityTypes.OrderBy(pt => pt.Name).Select(pt => new PersonalityTypeQueryResponse()
+            return Task.FromResult(fantasyRealmDBContext.PersonalityTypes.OrderBy(pt => pt.Id).Select(pt => new PersonalityTypeQueryResponse()
             {
                 Id = pt.Id,
                 Name = pt.Name,

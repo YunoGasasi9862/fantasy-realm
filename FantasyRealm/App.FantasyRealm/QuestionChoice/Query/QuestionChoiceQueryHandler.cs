@@ -12,7 +12,7 @@ namespace App.FantasyRealm.QuestionChoice.Query
 
         public Task<IQueryable<QuestionChoiceQueryResponse>> Handle(QuestionChoiceQueryRequest request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(fantasyRealmDBContext.QuestionChoices.OrderBy(qc => qc.Choice).Select(qc => new QuestionChoiceQueryResponse()
+            return Task.FromResult(fantasyRealmDBContext.QuestionChoices.OrderBy(qc => qc.Id).Select(qc => new QuestionChoiceQueryResponse()
             {
                 Id = qc.Id,
                 QuestionId = qc.QuestionId,
