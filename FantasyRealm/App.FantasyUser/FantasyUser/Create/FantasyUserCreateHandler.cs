@@ -8,6 +8,7 @@ using Core.App.Features;
 using Core.App.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace App.FantasyUser.FantasyUser.Create
 {
@@ -41,6 +42,10 @@ namespace App.FantasyUser.FantasyUser.Create
                 Name = request.Name.Trim(),
                 Username = request.Username.Trim(),
                 DateOfBirth = DateTime.Parse(request.DateOfBirth.ToString()),
+                Role = new Domain.FantasyUserRole
+                {
+                    Name = request.Role
+                },
                 Email = request.Email.Trim(),
 
             };
@@ -51,7 +56,9 @@ namespace App.FantasyUser.FantasyUser.Create
 
             //queuing the object for later use by the consumer/processor
             RabbitMqDataPackage rabbitMqProcessorPackage = await RabbitMqPublisher.EstablishConnectionOnQueue(FantasyUserConstants.CREATE_USER_NOTIFICAITON_QUEUE_NAME);
-            await RabbitMqPublisher.PublishMessage(rabbitMqProcessorPackage.Channel, FantasyUserConstants.CREATE_USER_NOTIFICAITON_QUEUE_NAME, fantasyUser, CancellationToken);
+            
+            //self referencing issue - debug later (fantasy user has roles, and then roles has users - issue in serialization/deserialization)
+            await RabbitMqPublisher.PublishMessage(rabbitMqProcessorPackage.Channel, FantasyUserConstants.CREATE_USER_NOTIFICAITON_QUEUE_NAME, request, CancellationToken);
 
             return (CommandResponse)Success($"{request.ToString()} successfully created in the database!", fantasyUser.Id);
         }

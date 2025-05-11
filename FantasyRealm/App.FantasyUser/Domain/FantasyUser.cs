@@ -1,5 +1,6 @@
 ﻿using Core.App.Domain;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace App.FantasyUser.Domain
 {
@@ -24,9 +25,10 @@ namespace App.FantasyUser.Domain
 
         public string ProfilePicturePath { get; set; }
 
+        [JsonIgnore] 
         public virtual FantasyUserRole Role { get; set; }
 
+        [JsonIgnore]
         public virtual FantasyUserRefreshToken FantasyUserRefreshToken { get; set; }
-
     }
 }
