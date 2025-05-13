@@ -7,12 +7,14 @@ using Core.App.Features;
 using App.FantasyUser.FantasyUserRole.Create;
 using App.FantasyUser.FantasyUserRole.Update;
 using App.FantasyUser.FantasyUserRole.Delete;
+using Microsoft.AspNetCore.Authorization;
 
 //Generated from Custom Template.
 namespace API.FantasyUser.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class FantasyUserRolesController : ControllerBase
     {
         private readonly ILogger<FantasyUserRolesController> _logger;

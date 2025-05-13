@@ -6,12 +6,15 @@ using App.FantasyUser.FantasyUser.Query;
 using App.FantasyUser.FantasyUser.Create;
 using App.FantasyUser.FantasyUser.Delete;
 using App.FantasyUser.FantasyUser.Update;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 //Generated from Custom Template.
 namespace API.FantasyUser.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class FantasyUsersController : ControllerBase
     {
         private readonly ILogger<FantasyUsersController> _logger;
@@ -63,6 +66,7 @@ namespace API.FantasyUser.Controllers
 
 		// POST: api/FantasyUsers
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Post(FantasyUserCreateRequest request)
         {
             try
@@ -87,7 +91,7 @@ namespace API.FantasyUser.Controllers
         }
 
         // PUT: api/FantasyUsers
-        [HttpPut]
+        [HttpPut, Authorize(Roles = "Admin")]
         public async Task<IActionResult> Put(FantasyUserUpdateRequest request)
         {
             try
@@ -112,7 +116,7 @@ namespace API.FantasyUser.Controllers
         }
 
         // DELETE: api/FantasyUsers/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -132,5 +136,33 @@ namespace API.FantasyUser.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new CommandResponse(false, "An exception occured during FantasyUsersDelete.")); 
             }
         }
-	}
+
+        [HttpGet]
+        [Route("~/api/[action]")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Authorize()
+        {
+            bool? isAuthenticated = User.Identity?.IsAuthenticated;
+
+            return (isAuthenticated.HasValue && isAuthenticated.Value) ? Ok(new CommandResponse(true, await GetAuthenticatedUsersDetail())) :
+                BadRequest(new CommandResponse(false, "User not authenticated!"));
+        }
+
+        private Task<string> GetAuthenticatedUsersDetail()
+        {
+            string? userName = User.Identity?.Name;
+
+            bool isAdmin = User.IsInRole("Admin");
+
+            string? role = User.Claims?.SingleOrDefault(claim => claim.Type == ClaimTypes.Role)?.Value;
+
+            string? id = User.Claims?.SingleOrDefault(claim => claim.Type == "Id")?.Value;
+
+            return Task.FromResult($"User authenticated. " +
+                              $"User Name: {userName}, " +
+                              $"Is Admin?: {(isAdmin ? "Yes" : "No")}, " +
+                              $"Role: {role}, " +
+                              $"Id: {id}");
+        }
+    }
 }

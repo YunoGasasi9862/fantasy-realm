@@ -4,6 +4,7 @@ using App.FantasyRealm.PersonalityAnswer.Query;
 using App.FantasyRealm.PersonalityAnswer.Update;
 using Core.App.Features;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,7 @@ namespace API.FantasyRealm.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PersonalityAnswerController : Controller
     {
         private readonly ILogger<PersonalityAnswerController> _logger;
@@ -62,7 +64,7 @@ namespace API.FantasyRealm.Controllers
         }
 
         // POST: api/PersonalityAnswer
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Admin")]
         public async Task<IActionResult> Post(PersonalityAnswerCreateRequest request)
         {
             try
@@ -87,7 +89,7 @@ namespace API.FantasyRealm.Controllers
         }
 
         // PUT: api/PersonalityAnswer
-        [HttpPut]
+        [HttpPut, Authorize(Roles = "Admin")]
         public async Task<IActionResult> Put(PersonalityAnswerUpdateRequest request)
         {
             try
@@ -112,7 +114,7 @@ namespace API.FantasyRealm.Controllers
         }
 
         // DELETE: api/PersonalityAnswer/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             try

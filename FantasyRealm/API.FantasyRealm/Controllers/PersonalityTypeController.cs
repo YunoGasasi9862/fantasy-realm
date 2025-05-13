@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Core.App.Features;
 using App.FantasyRealm.PersonalityType.Create;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.FantasyRealm.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PersonalityTypeController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -48,7 +50,7 @@ namespace API.FantasyRealm.Controllers
             return Ok(personalityTypeQuery);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Admin")]
         public async Task<IActionResult> Post(PersonalityTypeCreateRequest personalityTypeCreateRequest)
         {
             if (ModelState.IsValid)
@@ -66,7 +68,7 @@ namespace API.FantasyRealm.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpPut]
+        [HttpPut, Authorize(Roles = "Admin")]
         public async Task<IActionResult> Put(PersonalityTypeUpdateRequest request)
         {
             if (ModelState.IsValid)
@@ -82,7 +84,7 @@ namespace API.FantasyRealm.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpDelete]
+        [HttpDelete, Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             if (ModelState.IsValid)

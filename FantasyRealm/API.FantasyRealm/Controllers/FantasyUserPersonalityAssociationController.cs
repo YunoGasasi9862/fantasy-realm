@@ -4,6 +4,7 @@ using App.FantasyRealm.FantasyUserPersonalityAssociation.Query;
 using App.FantasyRealm.FantasyUserPersonalityAssociation.Update;
 using Core.App.Features;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,7 @@ namespace API.FantasyRealm.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class FantasyUserPersonalityAssociationController : Controller
     {        
         private readonly ILogger<FantasyUserPersonalityAssociationController> _logger;
@@ -62,7 +64,7 @@ namespace API.FantasyRealm.Controllers
         }
 
         // POST: api/FantasyUserPersonalityAssociation
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Admin")]
         public async Task<IActionResult> Post(FantasyUserPersonalityAssociationCreateRequest request)
         {
             try
@@ -108,7 +110,7 @@ namespace API.FantasyRealm.Controllers
 
 
         // PUT: api/FantasyUserPersonalityAssociation
-        [HttpPut]
+        [HttpPut, Authorize(Roles = "Admin")]
         public async Task<IActionResult> Put(FantasyUserPersonalityAssociationUpdateRequest request)
         {
             try
@@ -133,7 +135,7 @@ namespace API.FantasyRealm.Controllers
         }
 
         // DELETE: api/FantasyUserPersonalityAssociation/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             try

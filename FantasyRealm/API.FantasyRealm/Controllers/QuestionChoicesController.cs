@@ -6,12 +6,14 @@ using Core.App.Features;
 using App.FantasyRealm.QuestionChoice.Create;
 using App.FantasyRealm.QuestionChoice.Update;
 using App.FantasyRealm.QuestionChoice.Delete;
+using Microsoft.AspNetCore.Authorization;
 
 //Generated from Custom Template.
 namespace API.FantasyRealm.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class QuestionChoicesController : ControllerBase
     {
         private readonly ILogger<QuestionChoicesController> _logger;
@@ -62,7 +64,7 @@ namespace API.FantasyRealm.Controllers
         }
 
 		// POST: api/QuestionChoices
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Admin")]
         public async Task<IActionResult> Post(QuestionChoiceCreateRequest request)
         {
             try
@@ -87,7 +89,7 @@ namespace API.FantasyRealm.Controllers
         }
 
         // PUT: api/QuestionChoices
-        [HttpPut]
+        [HttpPut, Authorize(Roles = "Admin")]
         public async Task<IActionResult> Put(QuestionChoiceUpdateRequest request)
         {
             try
@@ -112,7 +114,7 @@ namespace API.FantasyRealm.Controllers
         }
 
         // DELETE: api/QuestionChoices/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             try

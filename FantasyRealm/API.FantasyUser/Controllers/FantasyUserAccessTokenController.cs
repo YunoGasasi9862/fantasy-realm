@@ -46,31 +46,5 @@ namespace API.FantasyUser.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new CommandResponse(false, "An exception occured during FantasyUserRefreshTokensPost.")); 
             }
         }
-
-        // PUT: api/FantasyUserRefreshTokens
-        [HttpPut]
-        [AllowAnonymous]
-        public async Task<IActionResult> Put(FantasyUserRefreshTokenRequest request)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    var response = await _mediator.Send(request);
-                    if (response.IsSuccessful)
-                    {
-                        //return NoContent();
-                        return Ok(response);
-                    }
-                    ModelState.AddModelError("FantasyUserRefreshTokensPut", response.Message);
-                }
-                return BadRequest(new CommandResponse(false, string.Join("|", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage))));
-            }
-            catch (Exception exception)
-            {
-                _logger.LogError("FantasyUserRefreshTokensPut Exception: " + exception.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, new CommandResponse(false, "An exception occured during FantasyUserRefreshTokensPut.")); 
-            }
-        }
-	}
+    }
 }

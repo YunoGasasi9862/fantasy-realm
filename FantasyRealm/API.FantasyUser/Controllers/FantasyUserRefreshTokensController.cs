@@ -1,7 +1,6 @@
 ﻿#nullable disable
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
-using App.FantasyUser.Authorization.FantasyRealmRefreshToken.Create;
 using Core.App.Features;
 using Microsoft.AspNetCore.Authorization;
 using App.FantasyUser.Authorization.FantasyRealmAccessToken.Create;
@@ -45,32 +44,6 @@ namespace API.FantasyUser.Controllers
             {
                 _logger.LogError("FantasyUserAccessTokenPost Exception: " + exception.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, new CommandResponse(false, "An exception occured during FantasyUserRefreshTokensPost.")); 
-            }
-        }
-
-        // PUT: api/FantasyUserAccessToken
-        [HttpPut]
-        [AllowAnonymous]
-        public async Task<IActionResult> Put(FantasyUserAccessTokenRequest request)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    var response = await _mediator.Send(request);
-                    if (response.IsSuccessful)
-                    {
-                        //return NoContent();
-                        return Ok(response);
-                    }
-                    ModelState.AddModelError("FantasyUserAccessTokenPut", response.Message);
-                }
-                return BadRequest(new CommandResponse(false, string.Join("|", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage))));
-            }
-            catch (Exception exception)
-            {
-                _logger.LogError("FantasyUserAccessTokenPut Exception: " + exception.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, new CommandResponse(false, "An exception occured during FantasyUserRefreshTokensPut.")); 
             }
         }
 	}

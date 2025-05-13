@@ -1,18 +1,24 @@
 using App.FantasyRealm.Domain;
 using App.FantasyRealm.Features;
+using App.FantasyUser.Domain;
 using Core.App.Domain;
 using Core.App.Interfaces;
 using Core.App.Managers;
 using Core.App.Processors;
 using Core.App.Publishers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
-builder.Services.Configure<RabbitMqConfiguration>(builder.Configuration.GetSection("RabbitMqConfiguration"));
 
+builder.Services.Configure<AccessTokenSettings>(builder.Configuration.GetSection(nameof(AccessTokenSettings)));
+builder.Services.Configure<RabbitMqConfiguration>(builder.Configuration.GetSection(nameof(RabbitMqConfiguration)));
+   
 var connectionString = builder.Configuration.GetConnectionString("FantasyRealmDBConnectionString");
 builder.Services.AddDbContext<FantasyRealmDBContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(FantasyRealmDBHandler).Assembly));
@@ -31,12 +37,76 @@ builder.Services.AddCors(options =>
         });
 });
 
+
+// Enable JWT Bearer authentication as the default scheme.
+AccessTokenSettings? accessTokenSettings = builder.Configuration.GetSection(nameof(AccessTokenSettings)).Get<AccessTokenSettings>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(config =>
+    {
+        config.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidIssuer = accessTokenSettings?.Issuer,
+            ValidAudience = accessTokenSettings?.Audience,
+            IssuerSigningKey = accessTokenSettings?.SigningKey,
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true
+        };
+    });
+
+
+
 // Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+// Configure Swagger/OpenAPI documentation, including JWT auth support in the UI.
+builder.Services.AddSwaggerGen(c =>
+{
+    // Define the basic information for your API.
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "API",
+        Version = "v1"
+    });
+
+    // Add the JWT Bearer scheme to the Swagger UI so tokens can be tested in requests.
+    c.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = JwtBearerDefaults.AuthenticationScheme,
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = """
+        JWT Authorization header using the Bearer scheme.
+        Enter your token as: Bearer your_token_here
+        Example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        """
+    });
+
+    // Add the security requirement globally so all endpoints are secured unless specified otherwise.
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = JwtBearerDefaults.AuthenticationScheme
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+});
 
 var app = builder.Build();
 
@@ -50,6 +120,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
