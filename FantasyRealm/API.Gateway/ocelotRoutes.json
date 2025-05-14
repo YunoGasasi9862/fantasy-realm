@@ -1,7 +1,8 @@
 {
   "Routes": [
+    //USERS 
     {
-      "DownstreamPathTemplate": "/api/projects/{id}",
+      "DownstreamPathTemplate": "/api/FantasyUserAccessToken",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -9,11 +10,11 @@
           "Port": 7244
         }
       ],
-      "UpstreamPathTemplate": "/api/projects/{id}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+      "UpstreamPathTemplate": "/api/FantasyUserAccessToken",
+      "UpstreamHttpMethod": [ "Post" ]
     },
     {
-      "DownstreamPathTemplate": "/api/tags/{id}",
+      "DownstreamPathTemplate": "/api/FantasyUserRefreshTokens",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -21,11 +22,11 @@
           "Port": 7244
         }
       ],
-      "UpstreamPathTemplate": "/api/tags/{id}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+      "UpstreamPathTemplate": "/api/FantasyUserRefreshTokens",
+      "UpstreamHttpMethod": [ "Post" ]
     },
     {
-      "DownstreamPathTemplate": "/api/works/{id}",
+      "DownstreamPathTemplate": "/api/FantasyUserRoles",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -33,43 +34,94 @@
           "Port": 7244
         }
       ],
-      "UpstreamPathTemplate": "/api/works/{id}",
+      "UpstreamPathTemplate": "/api/FantasyUserRoles",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
     },
     {
-      "DownstreamPathTemplate": "/api/users/{id}",
+      "DownstreamPathTemplate": "/api/FantasyUsers",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7279
+          "Port": 7244
         }
       ],
-      "UpstreamPathTemplate": "/api/users/{id}",
+      "UpstreamPathTemplate": "/api/FantasyUsers",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
     },
     {
-      "DownstreamPathTemplate": "/api/roles/{id}",
+      "DownstreamPathTemplate": "/api/Authorize",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7279
+          "Port": 7244
         }
       ],
-      "UpstreamPathTemplate": "/api/roles/{id}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+      "UpstreamPathTemplate": "/api/Authorize",
+      "UpstreamHttpMethod": [ "Get" ]
     },
+
+    //FANTASY REALMS
+
     {
-      "DownstreamPathTemplate": "/api/skills/{id}",
+      "DownstreamPathTemplate": "/api/FantasyUserPersonalityAssociation",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7279
+          "Port": 7219
         }
       ],
-      "UpstreamPathTemplate": "/api/skills/{id}",
+      "UpstreamPathTemplate": "/api/FantasyUserPersonalityAssociation",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/PersonalityAnswer",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7219
+        }
+      ],
+      "UpstreamPathTemplate": "/api/PersonalityAnswer",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/PersonalityType",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7219
+        }
+      ],
+      "UpstreamPathTemplate": "/api/PersonalityType",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/QuestionChoices",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7219
+        }
+      ],
+      "UpstreamPathTemplate": "/api/QuestionChoices",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Questions",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7219
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Questions",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
     }
   ]
