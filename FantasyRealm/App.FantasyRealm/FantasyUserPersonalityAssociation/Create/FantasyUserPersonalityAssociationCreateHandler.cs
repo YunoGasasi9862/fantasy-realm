@@ -14,6 +14,8 @@ namespace App.FantasyRealm.FantasyUserPersonalityAssociation.Create
 
         public async Task<CommandResponse> Handle(FantasyUserPersonalityAssociationCreateRequest request, CancellationToken cancellationToken)
         {
+            //i think we forgot to fix this ;-;
+            //the better way is to ask for this data from the microservice B
             if(await fantasyRealmDBContext.FantsayUserPersonalityAssociations.AnyAsync(a => a.FantasyUserId == request.FantasyUserId && a.PersonalityTypeId == request.PersonalityTypeId, cancellationToken))
             {
                 return (CommandResponse)Error($"Association between - {request.FantasyUserId} and {request.PersonalityTypeId} - already exists in the database!");
